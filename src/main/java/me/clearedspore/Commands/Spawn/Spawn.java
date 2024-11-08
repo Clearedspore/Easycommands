@@ -1,0 +1,64 @@
+package me.clearedspore.Commands.Spawn;
+
+import me.clearedspore.easycommands;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class Spawn implements CommandExecutor {
+
+    private final easycommands plugin;
+
+    public Spawn(easycommands plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender instanceof Player p) {
+
+            Location location = plugin.getConfig().getLocation("spawn");
+
+            if (location != null) {
+                if (args.length == 0) {
+
+                    p.teleport(location);
+
+                    p.sendMessage(ChatColor.BLUE + "You have been teleported to spawn!");
+
+                }
+                if(args.length == 1) {
+                    String playername = args[0];
+
+                    Player target = Bukkit.getServer().getPlayerExact(playername);
+
+                    if (target == null) {
+                        p.sendMessage(ChatColor.RED + "Player is not online!");
+
+                    } else if (p.hasPermission("easycommands.spawn.other")) {
+
+                        target.teleport(location);
+                        target.sendMessage(ChatColor.BLUE + "You have been teleported to spawn!");
+                        p.sendMessage(ChatColor.BLUE + "You have been teleported " + ChatColor.WHITE + target.getDisplayName() + ChatColor.BLUE + " to spawn!");
+                        for (Player online : Bukkit.getOnlinePlayers()) {
+                            if (online.hasPermission("easycommands.logs"))
+                                online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");
+                        }
+                    } else {
+
+                        if (p.hasPermission(String.valueOf("easycommands.spawn.other" == null))) {
+
+                            p.sendMessage(ChatColor.RED + "You don't have permission to teleport other people to spawn!");
+                        }
+
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}

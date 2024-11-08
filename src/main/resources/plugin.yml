@@ -1,0 +1,83 @@
+name: Easycommands
+version: '1.0-SNAPSHOT'
+main: me.clearedspore.easycommands
+api-version: '1.21'
+commands:
+  clear:
+    description: Clear your inventory!
+    permission: easycommands.clear
+    aliases:
+      - ci
+  gmc:
+    description: Change your gamemode to Creative!
+    permission: easycommands.creative
+  gmsp:
+    description: Change your gamemode to Spectator!
+    permission: easycommands.spectator
+  gma:
+    description: Change your gamemode to Adventure!
+    permission: easycommands.adventure
+  gms:
+    description: Change your gamemode to Survival!
+    permission: easycommands.survival
+  feed:
+    description: Feed yourself!
+    permission: easycommands.feed
+  god:
+    description: Put yourself in godmode!
+    permission: easycommands.god
+  repair:
+    description: Repair the item in your hand!
+    permission: easycommands.repair
+  heal:
+    description: Heal yourself!
+    permission: easycommands.heal
+  easycommands:
+    description: Get info about the plugin!
+  repairall:
+    description: Repair all the items in your inventory!
+    permission: easycommands.repairall
+    aliases:
+      - rpall
+  teleport:
+    description: Teleport to players or to yourself!
+    permission: easycommands.teleport
+    aliases:
+      - tp
+  teleportall:
+    description: Teleport all players to you!
+    permission: easycommands.teleport.all
+    aliases:
+      - tpall
+  setspawn:
+    description: Set the spawnpoint!
+    permission: easycommands.setspawn
+  spawn:
+    description: Go to the spawnpoint!
+    permission: easycommands.spawn
+  enderchest:
+    description: Open your enderchest!
+    permission: easycommands.enderchest
+    aliases:
+      - ec
+      - openec
+      - openenderchest
+      - endersee
+  nick:
+    description: Nick yourself!
+    permission: easycommands.nick
+  unnick:
+    description: unnick yourself!
+    permission: easycommands.nick
+  tphere:
+    description: Teleport players to you!
+    permission: easycommands.teleport.here
+  clearchat:
+    description: Clear the chat!
+    permission: easycommands.clearchat
+    aliases:
+      - clc
+  customitems:
+    description: Open a gui with all customitems!
+    aliases:
+      - cs
