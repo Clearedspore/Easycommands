@@ -32,8 +32,6 @@ commands:
   heal:
     description: Heal yourself!
     permission: easycommands.heal
-  easycommands:
-    description: Get info about the plugin!
   repairall:
     description: Repair all the items in your inventory!
     permission: easycommands.repairall

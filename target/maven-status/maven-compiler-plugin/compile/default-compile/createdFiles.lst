@@ -12,7 +12,6 @@ me\clearedspore\Commands\Guis\MenuListener$1.class
 me\clearedspore\Commands\Spawn\Spawn.class
 me\clearedspore\Commands\Gamemodes\CreativeMode.class
 me\clearedspore\Commands\Enderchest.class
-me\clearedspore\Commands\InfoMessage.class
 me\clearedspore\Commands\Teleport\TeleportAll.class
 me\clearedspore\Listeners\SpawnListener.class
 me\clearedspore\Commands\ClearInventory.class

@@ -1,5 +1,6 @@
 package me.clearedspore;
 
+import com.sun.jdi.Value;
 import me.clearedspore.Commands.*;
 import me.clearedspore.Commands.Gamemodes.*;
 import me.clearedspore.Commands.Guis.CustomItems;
@@ -13,8 +14,9 @@ import me.clearedspore.Commands.Teleport.tphere;
 import me.clearedspore.Commands.Guis.MenuListener;
 import me.clearedspore.Listeners.SpawnListener;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
 
 public final class easycommands extends JavaPlugin {
 
@@ -42,7 +44,6 @@ public final class easycommands extends JavaPlugin {
         getCommand("feed").setExecutor(new Feed());
         getCommand("repair").setExecutor(new Repair());
         getCommand("heal").setExecutor(new Heal());
-        getCommand("easycommands").setExecutor(new InfoMessage());
         getCommand("repairall").setExecutor(new Repairall());
         getCommand("teleport").setExecutor(new Teleport());
         getCommand("tphere").setExecutor(new tphere());
@@ -54,7 +55,6 @@ public final class easycommands extends JavaPlugin {
         getCommand("unnick").setExecutor(new Nick());
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("customitems").setExecutor(new CustomItems());
-
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new MenuListener(this), this);
