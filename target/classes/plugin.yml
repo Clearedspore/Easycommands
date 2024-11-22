@@ -77,5 +77,9 @@ commands:
       - clc
   customitems:
     description: Open a gui with all customitems!
+    permission: easycommands.customitems
     aliases:
       - cs
+  tps:
+    description: Get the server tps
+    permission: easycommands.tps
