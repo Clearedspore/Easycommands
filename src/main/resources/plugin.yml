@@ -8,6 +8,8 @@ commands:
     permission: easycommands.clear
     aliases:
       - ci
+      - clearinv
+      - clearinventory
   gmc:
     description: Change your gamemode to Creative!
     permission: easycommands.creative
@@ -83,3 +85,6 @@ commands:
   tps:
     description: Get the server tps
     permission: easycommands.tps
+  back:
+    description: Go back to your latest death location
+    permission: easycommands.back

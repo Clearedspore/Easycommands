@@ -8,7 +8,10 @@ me\clearedspore\Commands\Spawn\SetSpawn.class
 me\clearedspore\Commands\Guis\MechanicSwordListener.class
 me\clearedspore\Commands\Gamemodes\SpectatoMode.class
 me\clearedspore\easycommands.class
+me\clearedspore\Commands\Back.class
 me\clearedspore\Commands\Guis\MenuListener$1.class
+me\clearedspore\Listeners\DelayedTask.class
+me\clearedspore\Commands\ecrl.class
 me\clearedspore\Commands\Spawn\Spawn.class
 me\clearedspore\Commands\Gamemodes\CreativeMode.class
 me\clearedspore\Commands\Enderchest.class
@@ -18,7 +21,6 @@ me\clearedspore\Commands\ClearInventory.class
 me\clearedspore\Commands\Gamemodes\AdventureMode.class
 me\clearedspore\Commands\Guis\MenuListener.class
 me\clearedspore\Commands\Nick.class
-me\clearedspore\Commands\Tps.class
 me\clearedspore\Commands\Gamemodes\SurvivalMode.class
 me\clearedspore\Commands\Feed.class
 me\clearedspore\Commands\Teleport\tphere.class

@@ -12,6 +12,7 @@ import me.clearedspore.Commands.Teleport.Teleport;
 import me.clearedspore.Commands.Teleport.TeleportAll;
 import me.clearedspore.Commands.Teleport.tphere;
 import me.clearedspore.Commands.Guis.MenuListener;
+import me.clearedspore.Listeners.DelayedTask;
 import me.clearedspore.Listeners.SpawnListener;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,8 +24,9 @@ import java.util.Set;
 
 public final class easycommands extends JavaPlugin {
 
+    public static Set<Player> confirmation = new HashSet<>();
     public ArrayList<Player> invisible_list = new ArrayList<>();
-    private static easycommands plugin;
+    public static easycommands plugin;
 
     public static easycommands getPlugin() {
         return plugin;
@@ -59,11 +61,13 @@ public final class easycommands extends JavaPlugin {
         getCommand("unnick").setExecutor(new Nick());
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("customitems").setExecutor(new CustomItems());
-        getCommand("tps").setExecutor(new Tps());
+        getCommand("back").setExecutor(new Back());
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new MenuListener(this), this);
         getServer().getPluginManager().registerEvents(new MechanicSwordListener(this), this);
+
+        new DelayedTask(this);
 
 
         getConfig().options().copyDefaults();

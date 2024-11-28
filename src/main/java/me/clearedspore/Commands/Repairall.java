@@ -13,8 +13,8 @@ public class Repairall implements CommandExecutor {
 
         if (sender instanceof Player p) {
 
+            p.sendMessage(ChatColor.BLUE + "You have repaired all your items in your inventory!");
             for (int i = 0; i <= 36; i++) {
-                p.sendMessage(ChatColor.BLUE + "You have repaired all your items in your inventory!");
                 try {
                     p.getInventory().getItem(i).setDurability((short) 0);
                     p.getInventory().getBoots().setDurability((short) 0);

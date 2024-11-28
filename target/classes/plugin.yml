@@ -83,3 +83,10 @@ commands:
   tps:
     description: Get the server tps
     permission: easycommands.tps
+  ecrl:
+    description: Reload the plugin
+    permission: easycommands.reload
+    aliases:
+      - easycommandsreload
+      - easycmdreload
+      - ecreload
