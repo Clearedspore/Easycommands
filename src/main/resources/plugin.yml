@@ -88,3 +88,6 @@ commands:
   back:
     description: Go back to your latest death location
     permission: easycommands.back
+  freeze:
+    description: Freeze a player
+    permission: easycommands.freeze

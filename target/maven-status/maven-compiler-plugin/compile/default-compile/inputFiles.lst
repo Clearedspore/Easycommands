@@ -1,9 +1,10 @@
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Back.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\ClearChat.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\ClearInventory.java
-C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\ecrl.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Enderchest.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Feed.java
+C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Freeze\Freeze.java
+C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Freeze\FreezeListener.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Gamemodes\AdventureMode.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Gamemodes\CreativeMode.java
 C:\Coding\Easycommands\src\main\java\me\clearedspore\Commands\Gamemodes\SpectatoMode.java

@@ -8,6 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.potion.PotionEffectType;
+
+import static me.clearedspore.easycommands.LeftFrozen;
 
 public class SpawnListener implements Listener {
 
@@ -17,11 +20,8 @@ public class SpawnListener implements Listener {
         this.plugin = plugin;
     }
 
-    
-
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e){
-
         Player p = e.getPlayer();
 
         if(e.getPlayer().hasPlayedBefore()){

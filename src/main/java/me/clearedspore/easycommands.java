@@ -2,6 +2,8 @@ package me.clearedspore;
 
 import com.sun.jdi.Value;
 import me.clearedspore.Commands.*;
+import me.clearedspore.Commands.Freeze.Freeze;
+import me.clearedspore.Commands.Freeze.FreezeListener;
 import me.clearedspore.Commands.Gamemodes.*;
 import me.clearedspore.Commands.Guis.CustomItems;
 import me.clearedspore.Commands.Guis.MechanicSwordListener;
@@ -26,7 +28,11 @@ public final class easycommands extends JavaPlugin {
 
     public static Set<Player> confirmation = new HashSet<>();
     public ArrayList<Player> invisible_list = new ArrayList<>();
+    public static Set<Player> Frozen = new HashSet<>();
+    public static Set<Player> LeftFrozen = new HashSet<>();
+
     public static easycommands plugin;
+
 
     public static easycommands getPlugin() {
         return plugin;
@@ -62,10 +68,12 @@ public final class easycommands extends JavaPlugin {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("customitems").setExecutor(new CustomItems());
         getCommand("back").setExecutor(new Back());
+        getCommand("freeze").setExecutor(new Freeze());
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new MenuListener(this), this);
         getServer().getPluginManager().registerEvents(new MechanicSwordListener(this), this);
+        getServer().getPluginManager().registerEvents(new FreezeListener(this), this);
 
         new DelayedTask(this);
 
