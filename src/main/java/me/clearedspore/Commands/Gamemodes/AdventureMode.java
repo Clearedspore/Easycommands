@@ -21,7 +21,7 @@ public class AdventureMode implements CommandExecutor {
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Adventure]");
+                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Adventure]");
                 }
             }else{
 
@@ -40,7 +40,7 @@ public class AdventureMode implements CommandExecutor {
 
                         for(Player online : Bukkit.getOnlinePlayers()){
                             if(online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Adventure]");
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Adventure]");
                         }
                     }else{
                         if (p.hasPermission(String.valueOf("easycommands.adventure.other" == null))){

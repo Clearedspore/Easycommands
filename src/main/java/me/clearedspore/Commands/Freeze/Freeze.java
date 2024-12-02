@@ -26,13 +26,26 @@ public class Freeze implements CommandExecutor {
                 if(Frozen.contains(target)){
                     target.setInvulnerable(false);
                     target.setGlowing(false);
-                    target.removePotionEffect(PotionEffectType.BLINDNESS);
                     target.removePotionEffect(PotionEffectType.INVISIBILITY);
                     Frozen.remove(target);
                     p.sendMessage(ChatColor.BLUE + "You have unfrozen " + ChatColor.WHITE + target.getDisplayName());
+                    for (Player online : Bukkit.getOnlinePlayers()){
+
+                        if(online.hasPermission("easycommands.logs")){
+                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has freezed" + target.getDisplayName() + "]");
+                        }
+                    }
+
                 }else {
                     Frozen.add(target);
                     p.sendMessage(ChatColor.BLUE + "You have frozen " + ChatColor.WHITE + target.getDisplayName());
+
+                    for (Player online : Bukkit.getOnlinePlayers()){
+
+                        if(online.hasPermission("easycommands.logs")){
+                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has unfreezed" + target.getDisplayName() + "]");
+                        }
+                    }
                 }
 
             }

@@ -46,7 +46,7 @@ public class Spawn implements CommandExecutor {
                         p.sendMessage(ChatColor.BLUE + "You have been teleported " + ChatColor.WHITE + target.getDisplayName() + ChatColor.BLUE + " to spawn!");
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");
                         }
                     } else {
 

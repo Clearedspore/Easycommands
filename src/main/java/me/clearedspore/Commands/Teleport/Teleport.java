@@ -23,7 +23,7 @@ public class Teleport implements CommandExecutor {
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " teleported to " + target.getDisplayName() + "]");
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " teleported to " + target.getDisplayName() + "]");
                 }
             } else if (args.length == 2) {
 
@@ -36,7 +36,7 @@ public class Teleport implements CommandExecutor {
 
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName() + "]");
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName() + "]");
                         }
                     }else{
                         p.sendMessage(ChatColor.RED + "You don't have permission to teleport other players to you!");

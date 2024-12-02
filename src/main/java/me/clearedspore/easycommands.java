@@ -1,7 +1,8 @@
 package me.clearedspore;
 
-import com.sun.jdi.Value;
 import me.clearedspore.Commands.*;
+import me.clearedspore.Commands.BeaconShop.BeaconShopGui;
+import me.clearedspore.Commands.BeaconShop.BeaconShopListener;
 import me.clearedspore.Commands.Freeze.Freeze;
 import me.clearedspore.Commands.Freeze.FreezeListener;
 import me.clearedspore.Commands.Gamemodes.*;
@@ -16,20 +17,22 @@ import me.clearedspore.Commands.Teleport.tphere;
 import me.clearedspore.Commands.Guis.MenuListener;
 import me.clearedspore.Listeners.DelayedTask;
 import me.clearedspore.Listeners.SpawnListener;
+import net.luckperms.api.LuckPerms;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public final class easycommands extends JavaPlugin {
 
-    public static Set<Player> confirmation = new HashSet<>();
-    public ArrayList<Player> invisible_list = new ArrayList<>();
     public static Set<Player> Frozen = new HashSet<>();
     public static Set<Player> LeftFrozen = new HashSet<>();
+    public static Set<Player> FlyEnabled = new HashSet<>();
+    public static Set<Player> InvLooking = new HashSet<>();
 
     public static easycommands plugin;
 
@@ -69,11 +72,19 @@ public final class easycommands extends JavaPlugin {
         getCommand("customitems").setExecutor(new CustomItems());
         getCommand("back").setExecutor(new Back());
         getCommand("freeze").setExecutor(new Freeze());
+        getCommand("beaconshop").setExecutor(new BeaconShopGui());
+        getCommand("invsee").setExecutor(new Invsee());
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new MenuListener(this), this);
         getServer().getPluginManager().registerEvents(new MechanicSwordListener(this), this);
         getServer().getPluginManager().registerEvents(new FreezeListener(this), this);
+        getServer().getPluginManager().registerEvents(new BeaconShopListener(this), this);
+
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            LuckPerms api = provider.getProvider();
+        }
 
         new DelayedTask(this);
 

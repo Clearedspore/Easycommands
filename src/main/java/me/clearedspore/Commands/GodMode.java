@@ -20,7 +20,7 @@ public class GodMode implements CommandExecutor {
                     for (Player online : Bukkit.getOnlinePlayers()){
 
                         if(online.hasPermission("easycommands.logs"))
-                            online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has disabled godmode for themself]");
+                            online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has disabled godmode for themself]");
                     }
                 } else {
                     p.setInvulnerable(true);
@@ -28,7 +28,7 @@ public class GodMode implements CommandExecutor {
                     for (Player online : Bukkit.getOnlinePlayers()){
 
                         if(online.hasPermission("easycommands.logs"))
-                            online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " enabled godmode for themself]");
+                            online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " enabled godmode for themself]");
                     }
                 }
         }

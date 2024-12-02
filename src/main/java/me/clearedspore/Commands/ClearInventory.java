@@ -34,7 +34,7 @@ public class ClearInventory implements CommandExecutor {
                             p.sendMessage(ChatColor.BLUE + "You have cleard " + target.getDisplayName() + "'s inventory!");
                             for (Player online : Bukkit.getOnlinePlayers()) {
                                 if (online.hasPermission("easycommands.logs"))
-                                    online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has cleared the inventory off " + target.getDisplayName() + "]");
+                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory off " + target.getDisplayName() + "]");
                             }
                         } else {
 

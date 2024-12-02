@@ -36,7 +36,7 @@ public class Back implements CommandExecutor {
                         for (Player online : Bukkit.getOnlinePlayers()){
 
                             if(online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has teleported " + ChatColor.GRAY + target.getDisplayName() + ChatColor.GRAY + " to their last death location]");
+                                online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has teleported " + ChatColor.GRAY + target.getDisplayName() + ChatColor.GRAY + " to their last death location]");
                         }
                     } else{
                         p.sendMessage(ChatColor.RED +"You don't have permission to teleport other people to their last death location!");

@@ -21,7 +21,7 @@ public class SpectatoMode implements CommandExecutor {
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Spectator]");
+                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Spectator]");
                 }
             }else{
 
@@ -39,7 +39,7 @@ public class SpectatoMode implements CommandExecutor {
                         p.sendMessage(ChatColor.BLUE + "You have changed " + ChatColor.WHITE + target.getDisplayName() + "'s " +ChatColor.BLUE + "to "+ ChatColor.WHITE + "Spectator");
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed the gamemode off " + target.getDisplayName() + " to Spectator]");
+                                online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed the gamemode off " + target.getDisplayName() + " to Spectator]");
                         }
                     }else{
                         if (p.hasPermission(String.valueOf("easycommands.spectator.other" == null))){

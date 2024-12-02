@@ -2,6 +2,8 @@ name: Easycommands
 version: '1.0-SNAPSHOT'
 main: me.clearedspore.easycommands
 api-version: '1.21'
+softdepend:
+  - Luckperms
 commands:
   clear:
     description: Clear your inventory!
@@ -91,3 +93,9 @@ commands:
   freeze:
     description: Freeze a player
     permission: easycommands.freeze
+  beaconshop:
+    description: Open the beaconshop
+    permission: easycommands.beaconshop.command
+  invsee:
+    description: Open a player's inventory
+    permission: easycommands.inventory

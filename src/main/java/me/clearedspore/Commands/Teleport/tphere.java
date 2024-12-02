@@ -22,7 +22,7 @@ public class tphere implements CommandExecutor {
                 p.sendMessage(ChatColor.BLUE + "Teleported " + ChatColor.WHITE + target.getDisplayName() + ChatColor.BLUE + " to you");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to themself]");
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to themself]");
                 }
             }
 

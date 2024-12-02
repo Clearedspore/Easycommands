@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.Beacon;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,7 @@ public class CustomItems implements CommandExecutor {
             //buttons
             ItemStack Drill = new ItemStack(Material.PRISMARINE_SHARD);
             ItemStack Mechanic_sword = new ItemStack(Material.NETHERITE_SWORD);
+            ItemStack BeaconShop = new ItemStack(Material.BEACON);
 
 
             //item metadata
@@ -72,6 +74,14 @@ public class CustomItems implements CommandExecutor {
 
             Mechanic_sword.setItemMeta(swordMeta);
 
+            ItemMeta BeaconMeta = BeaconShop.getItemMeta();
+            BeaconMeta.setDisplayName(ChatColor.AQUA + "BeaconShop");
+
+            BeaconMeta.setUnbreakable(true);
+            BeaconMeta.setEnchantmentGlintOverride(true);
+
+            BeaconShop.setItemMeta(BeaconMeta);
+
 
 
 
@@ -79,6 +89,7 @@ public class CustomItems implements CommandExecutor {
 
             menu.setItem(0, Drill);
             menu.setItem(1, Mechanic_sword);
+            menu.setItem(2, BeaconShop);
 
             p.openInventory(menu);
 

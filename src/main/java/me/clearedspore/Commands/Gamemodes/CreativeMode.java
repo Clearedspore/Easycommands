@@ -20,7 +20,7 @@ public class CreativeMode implements CommandExecutor {
                 p.sendMessage(ChatColor.BLUE + "Set gamemode to" + ChatColor.WHITE + " Creative!");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Creative]");
+                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Creative]");
                 }
                 }else{
 
@@ -38,7 +38,7 @@ public class CreativeMode implements CommandExecutor {
                         p.sendMessage(ChatColor.BLUE + "You have changed " + ChatColor.WHITE + target.getDisplayName() + "'s " +ChatColor.BLUE + "to "+ ChatColor.WHITE + " Creative");
                         for(Player online : Bukkit.getOnlinePlayers()){
                             if(online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Creative]");
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Creative]");
                         }
                     }else{
                         if (p.hasPermission(String.valueOf("easycommands.creative.other" == null))){

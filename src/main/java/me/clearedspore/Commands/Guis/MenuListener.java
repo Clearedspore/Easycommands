@@ -87,6 +87,18 @@ public class MenuListener implements Listener {
                     Mechanic_sword.setItemMeta(swordMeta);
                     p.getInventory().addItem(Mechanic_sword);
                     p.closeInventory();
+                    p.sendMessage(ChatColor.BLUE + "Received " + ChatColor.WHITE + "Mechanic Sword");
+                    break;
+                case BEACON:
+                    ItemStack BeaconShop = new ItemStack(Material.BEACON);
+                    ItemMeta BeaconMeta = BeaconShop.getItemMeta();
+                    BeaconMeta.setDisplayName(ChatColor.AQUA + "BeaconShop");
+                    BeaconMeta.setUnbreakable(true);
+                    BeaconMeta.setEnchantmentGlintOverride(true);
+                    BeaconShop.setItemMeta(BeaconMeta);
+                    p.getInventory().addItem(BeaconShop);
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.BLUE + "Received " + ChatColor.WHITE + "BeaconShop");
                     break;
             }
 

@@ -29,7 +29,7 @@ public class SetSpawn implements CommandExecutor {
             p.sendMessage(ChatColor.BLUE + "You have set the spawn location!");
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.logs"))
-                    online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has set a new spawn]");
+                    online.sendMessage(ChatColor.GRAY + "[ " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has set a new spawn]");
             }
 
         }

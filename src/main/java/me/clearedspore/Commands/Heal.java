@@ -27,7 +27,7 @@ public class Heal implements CommandExecutor {
                 for (Player online : Bukkit.getOnlinePlayers()){
 
                     if(online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has healed himself]");
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed himself]");
                 }
             }else{
 
@@ -45,21 +45,23 @@ public class Heal implements CommandExecutor {
                         target.sendMessage(ChatColor.BLUE + "You have been healed by " + ChatColor.WHITE + p.getDisplayName());
                         p.sendMessage(ChatColor.BLUE + "You have healed " + ChatColor.WHITE + target.getDisplayName());
 
-                        for (Player online : Bukkit.getOnlinePlayers()){
+                        for (Player online : Bukkit.getOnlinePlayers()) {
 
-                            if(online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[Server: " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has healed " + ChatColor.GRAY + target.getDisplayName() + ChatColor.GRAY + " ]");
+                            if (online.hasPermission("easycommands.logs")) {
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed " + target.getDisplayName() + "]");
+                            }
                         }
-                    }else{
-                        if(p.hasPermission(String.valueOf("easycommands.heal.other" == null))){
+                        }else{
+                            if (p.hasPermission(String.valueOf("easycommands.heal.other" == null))) {
 
-                            p.sendMessage(ChatColor.RED + "You don't have permission to heal other people!");
+                                p.sendMessage(ChatColor.RED + "You don't have permission to heal other people!");
 
+                            }
                         }
                     }
                 }
             }
-        }
         return true;
     }
 }
+

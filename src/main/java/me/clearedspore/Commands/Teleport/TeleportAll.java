@@ -20,7 +20,7 @@ public class TeleportAll implements CommandExecutor {
             }
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.logs"))
-                    online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has teleported all players to him]");
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported all players to him]");
             }
         }
         return true;
