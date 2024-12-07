@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +16,10 @@ public class Repair implements CommandExecutor {
             if(args.length == 0){
 
                 p.getInventory().getItemInMainHand().setDurability((short) 0);
-                p.sendMessage(ChatColor.BLUE + "Your item has been repaired!");
+
+                String Repair = Messages.get().getString("Repair");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Repair));
+
             }
         }
         return true;

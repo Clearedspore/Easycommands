@@ -1,29 +1,21 @@
 package me.clearedspore;
 
 import me.clearedspore.Commands.*;
-import me.clearedspore.Commands.BeaconShop.BeaconShopGui;
-import me.clearedspore.Commands.BeaconShop.BeaconShopListener;
 import me.clearedspore.Commands.Freeze.Freeze;
 import me.clearedspore.Commands.Freeze.FreezeListener;
 import me.clearedspore.Commands.Gamemodes.*;
-import me.clearedspore.Commands.Guis.CustomItems;
-import me.clearedspore.Commands.Guis.MechanicSwordListener;
 import me.clearedspore.Commands.Nick;
 import me.clearedspore.Commands.Spawn.SetSpawn;
 import me.clearedspore.Commands.Spawn.Spawn;
 import me.clearedspore.Commands.Teleport.Teleport;
 import me.clearedspore.Commands.Teleport.TeleportAll;
 import me.clearedspore.Commands.Teleport.tphere;
-import me.clearedspore.Commands.Guis.MenuListener;
-import me.clearedspore.Listeners.DelayedTask;
+import me.clearedspore.Files.Messages;
+import me.clearedspore.Listeners.JoinLeaveListener;
 import me.clearedspore.Listeners.SpawnListener;
-import net.luckperms.api.LuckPerms;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,28 +61,61 @@ public final class easycommands extends JavaPlugin {
         getCommand("nick").setExecutor(new Nick());
         getCommand("unnick").setExecutor(new Nick());
         getCommand("clearchat").setExecutor(new ClearChat());
-        getCommand("customitems").setExecutor(new CustomItems());
         getCommand("back").setExecutor(new Back());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("beaconshop").setExecutor(new BeaconShopGui());
         getCommand("invsee").setExecutor(new Invsee());
+        getCommand("easycommands").setExecutor(new Reload());
+        getCommand("kill").setExecutor(new Kill());
+
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new MenuListener(this), this);
-        getServer().getPluginManager().registerEvents(new MechanicSwordListener(this), this);
         getServer().getPluginManager().registerEvents(new FreezeListener(this), this);
-        getServer().getPluginManager().registerEvents(new BeaconShopListener(this), this);
-
-        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
-        if (provider != null) {
-            LuckPerms api = provider.getProvider();
-        }
-
-        new DelayedTask(this);
-
+        getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
+        Messages.setup();
+        Messages.get().addDefault("StaffJoin", "&9[Staff] &f%player% &9 has joined the server");
+        Messages.get().addDefault("StaffLeave", "&9[Staff] &f%player% &9 has left the server");
+        Messages.get().addDefault("Freeze", "&9You have freezed &f%target%");
+        Messages.get().addDefault("FrozenNotify", "&cYou have been frozen. Do not log out or you will be cleared!");
+        Messages.get().addDefault("FrozencmdBlock", "&cYou can't send commands while being frozen!");
+        Messages.get().addDefault("UnFreeze", "&9You have unfreezed &f%target%");
+        Messages.get().addDefault("Gamemode", "&9Gamemode changed to &f%gamemode%!");
+        Messages.get().addDefault("GamemodeOther", "&9You have changed &f%target%'s &9Gamemode to &f%gamemode%!");
+        Messages.get().addDefault("GamemodeTarget", "&9Your gamemode has been changed To &f%gamemode%!");
+        Messages.get().addDefault("SetSpawn", "&9You set the new spawn location!");
+        Messages.get().addDefault("Spawn", "&9You have been teleported to spawn!");
+        Messages.get().addDefault("SpawnOther", "&9You have teleported &f%target% to spawn!");
+        Messages.get().addDefault("Teleport", "&9Teleporting to &f%target%");
+        Messages.get().addDefault("TeleportOthers", "&9Teleporting &f%playertosend% &9to &f%target%");
+        Messages.get().addDefault("TeleportHere", "&9Teleporting &f%playertosend% &9to yourself");
+        Messages.get().addDefault("TeleportAll","&9Teleporting &f%online% &9players to you!");
+        Messages.get().addDefault("Back","&9Teleporting back to your last death location!");
+        Messages.get().addDefault("BackTarget","&9Teleporting back to your last death location!");
+        Messages.get().addDefault("BackOther","&9Teleporting &f%target% &fto their last death location");
+        Messages.get().addDefault("ClearChat", "&9%player% has cleared the chat!");
+        Messages.get().addDefault("ClearInventory", "&9You have cleared your inventory!");
+        Messages.get().addDefault("ClearInventoryOther", "&9You have cleared &f%target%'s &9Inventory!");
+        Messages.get().addDefault("EnderChestOther", "&9Opening &f%target%'s &9Enderchest!");
+        Messages.get().addDefault("Feed", "&9Your saturation has been set to the max!");
+        Messages.get().addDefault("FeedOther", "&9you have set &f%target%'s &9Saturation to the max!");
+        Messages.get().addDefault("GodEnable", "&aGodMode enabled");
+        Messages.get().addDefault("GodDisable", "&cGodMode disabled");
+        Messages.get().addDefault("Heal", "&9You have been healed!");
+        Messages.get().addDefault("HealOther", "&9You have healed &f%target%");
+        Messages.get().addDefault("Invsee", "&9Opening &f%target%'s &fInventory!");
+        Messages.get().addDefault("Nick", "&9You have nicked yourself as &f%nickname%&9!");
+        Messages.get().addDefault("UnNick", "&9You have Unicked yourself!");
+        Messages.get().addDefault("Reload", "&9Reloading all files!");
+        Messages.get().addDefault("Repair", "&9You have repaired the item in your hand!");
+        Messages.get().addDefault("Repairall", "&9You have repaired your inventory!");
+        Messages.get().addDefault("Kill", "&9You have killed yourself!");
+        Messages.get().addDefault("KillOther", "&9You have killed &f%target%&9!");
+        Messages.get().options().copyDefaults(true);
+        Messages.save();
+
 
     }
 

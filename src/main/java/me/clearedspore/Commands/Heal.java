@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -22,7 +23,9 @@ public class Heal implements CommandExecutor {
 
                 p.setHealth(20);
                 p.setFoodLevel(20);
-                p.sendMessage(ChatColor.BLUE + "You have been healed!");
+
+                String Heal = Messages.get().getString("Heal");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Heal));
 
                 for (Player online : Bukkit.getOnlinePlayers()){
 
@@ -42,8 +45,10 @@ public class Heal implements CommandExecutor {
 
                         target.setHealth(20);
                         target.setFoodLevel(20);
-                        target.sendMessage(ChatColor.BLUE + "You have been healed by " + ChatColor.WHITE + p.getDisplayName());
-                        p.sendMessage(ChatColor.BLUE + "You have healed " + ChatColor.WHITE + target.getDisplayName());
+
+                        String HealOther = Messages.get().getString("HealOther");
+                        HealOther = HealOther.replace("%target%", target.getDisplayName());
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', HealOther));
 
                         for (Player online : Bukkit.getOnlinePlayers()) {
 
@@ -52,7 +57,7 @@ public class Heal implements CommandExecutor {
                             }
                         }
                         }else{
-                            if (p.hasPermission(String.valueOf("easycommands.heal.other" == null))) {
+                            if (!p.hasPermission(("easycommands.heal.other"))) {
 
                                 p.sendMessage(ChatColor.RED + "You don't have permission to heal other people!");
 

@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Gamemodes;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -17,7 +18,9 @@ public class SurvivalMode implements CommandExecutor {
 
             if(args.length == 0){
                 p.setGameMode(GameMode.SURVIVAL);
-                p.sendMessage(ChatColor.BLUE + "Set gamemode to" + ChatColor.WHITE + " Survival!");
+                String GameMode = Messages.get().getString("Gamemode");
+                GameMode = GameMode.replace("%gamemode%", "Survival");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
@@ -32,17 +35,23 @@ public class SurvivalMode implements CommandExecutor {
                 if(target == null){
                     p.sendMessage(ChatColor.RED + "Player is not online!");
                 }else{
-                    if(p.hasPermission("easycommands.survival.other")) {
+                    if(p.hasPermission("easycommands.gamemode.other")) {
 
                         target.setGameMode(GameMode.SURVIVAL);
-                        target.sendMessage(ChatColor.BLUE + "Your gamemode has been changed by " + ChatColor.WHITE + p.getDisplayName() + ChatColor.BLUE + "to " + ChatColor.WHITE + "Survival");
-                        p.sendMessage(ChatColor.BLUE + "You have changed " + ChatColor.WHITE + target.getDisplayName() + "'s " +ChatColor.BLUE + "to "+ ChatColor.WHITE + "Survival");
-                        for (Player online : Bukkit.getOnlinePlayers()) {
+
+                        String GameModeT = Messages.get().getString("GamemodeTarget");
+                        GameModeT = GameModeT.replace("%gamemode%", "Survival");
+                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', GameModeT));
+
+                        String GameMode = Messages.get().getString("GamemodeOther");
+                        GameMode = GameMode.replace("%gamemode%", "Survival");
+                        GameMode = GameMode.replace("%target%", target.getDisplayName());
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));                        for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
                                 online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Survival]");
                         }
                     }else{
-                        if (p.hasPermission(String.valueOf("easycommands.survival.other" == null))){
+                        if (!p.hasPermission(("easycommands.gamemode.other"))){
 
                             p.sendMessage(ChatColor.RED + "You don't have permission to change other players their gamemode!");
                         }

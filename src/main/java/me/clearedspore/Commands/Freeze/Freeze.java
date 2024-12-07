@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Freeze;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,9 +27,10 @@ public class Freeze implements CommandExecutor {
                 if(Frozen.contains(target)){
                     target.setInvulnerable(false);
                     target.setGlowing(false);
-                    target.removePotionEffect(PotionEffectType.INVISIBILITY);
                     Frozen.remove(target);
-                    p.sendMessage(ChatColor.BLUE + "You have unfrozen " + ChatColor.WHITE + target.getDisplayName());
+                    String UnFreeze = Messages.get().getString("UnFreeze");
+                    UnFreeze = UnFreeze.replace("%target%", target.getDisplayName());
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', UnFreeze));
                     for (Player online : Bukkit.getOnlinePlayers()){
 
                         if(online.hasPermission("easycommands.logs")){
@@ -38,7 +40,16 @@ public class Freeze implements CommandExecutor {
 
                 }else {
                     Frozen.add(target);
-                    p.sendMessage(ChatColor.BLUE + "You have frozen " + ChatColor.WHITE + target.getDisplayName());
+                    String Freeze = Messages.get().getString("Freeze");
+                    Freeze = Freeze.replace("%target%", target.getDisplayName());
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Freeze));
+
+                    String FrozenNotify = Messages.get().getString("FrozenNotify");
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
 
                     for (Player online : Bukkit.getOnlinePlayers()){
 
@@ -48,7 +59,51 @@ public class Freeze implements CommandExecutor {
                     }
                 }
 
+            } else {
+            Player p = (Player) sender;
+            if(args.length == 0){
+                p.sendMessage(ChatColor.RED + "Please provide a player name!");
             }
+
+            String playername = args[0];
+
+            Player target = Bukkit.getServer().getPlayerExact(playername);
+
+            if(Frozen.contains(target)){
+                target.setInvulnerable(false);
+                target.setGlowing(false);
+                Frozen.remove(target);
+                String UnFreeze = Messages.get().getString("UnFreeze");
+                UnFreeze = UnFreeze.replace("%target%", target.getDisplayName());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', UnFreeze));
+                for (Player online : Bukkit.getOnlinePlayers()){
+
+                    if(online.hasPermission("easycommands.logs")){
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has freezed" + target.getDisplayName() + "]");
+                    }
+                }
+
+            }else {
+                Frozen.add(target);
+                String Freeze = Messages.get().getString("Freeze");
+                Freeze = Freeze.replace("%target%", target.getDisplayName());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Freeze));
+
+                String FrozenNotify = Messages.get().getString("FrozenNotify");
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
+
+                for (Player online : Bukkit.getOnlinePlayers()){
+
+                    if(online.hasPermission("easycommands.logs")){
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has unfreezed" + target.getDisplayName() + "]");
+                    }
+                }
+            }
+        }
         return true;
     }
 }

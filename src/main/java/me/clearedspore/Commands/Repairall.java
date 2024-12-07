@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +14,9 @@ public class Repairall implements CommandExecutor {
 
         if (sender instanceof Player p) {
 
-            p.sendMessage(ChatColor.BLUE + "You have repaired all your items in your inventory!");
+            String RepairAll = Messages.get().getString("RepairAll");
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', RepairAll));
+
             for (int i = 0; i <= 36; i++) {
                 try {
                     p.getInventory().getItem(i).setDurability((short) 0);

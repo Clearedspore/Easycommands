@@ -1,5 +1,6 @@
 package me.clearedspore.Listeners;
 
+import me.clearedspore.Files.Messages;
 import me.clearedspore.easycommands;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -32,7 +33,8 @@ public class SpawnListener implements Listener {
 
                 p.teleport(location);
 
-                p.sendMessage(ChatColor.BLUE +"You have been teleported to spawn!");
+                String Spawn = Messages.get().getString("Spawn");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
 
             }
 

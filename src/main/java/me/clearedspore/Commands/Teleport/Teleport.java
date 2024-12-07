@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Teleport;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,14 +13,16 @@ public class Teleport implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player p) {
-            if(command.getName().equalsIgnoreCase("teleport"))
             if (args.length == 0) {
                 p.sendMessage(ChatColor.RED + "Please provide a player name!");
             } else if (args.length == 1) {
                 Player target = Bukkit.getPlayer(args[0]);
 
                 p.teleport(target.getLocation());
-                p.sendMessage(ChatColor.BLUE + "You have teleported been to " + ChatColor.WHITE + target.getDisplayName());
+
+                String Teleport = Messages.get().getString("Teleport");
+                Teleport = Teleport.replace("%target%", target.getDisplayName());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
@@ -27,12 +30,16 @@ public class Teleport implements CommandExecutor {
                 }
             } else if (args.length == 2) {
 
-                    if(p.hasPermission("easycommands.teleport.here")){
+                    if(p.hasPermission("easycommands.teleport.other")){
                         Player playertosend = Bukkit.getPlayer(args[0]);
                         Player target = Bukkit.getPlayer(args[1]);
 
                         playertosend.teleport(target.getLocation());
-                        p.sendMessage(ChatColor.BLUE + "You have teleported " + ChatColor.WHITE + playertosend.getDisplayName() + ChatColor.BLUE + " to " + ChatColor.WHITE + target.getDisplayName());
+
+                        String Teleport = Messages.get().getString("TeleportOthers");
+                        Teleport = Teleport.replace("%playertosend%", playertosend.getDisplayName());
+                        Teleport = Teleport.replace("%target%", target.getDisplayName());
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))

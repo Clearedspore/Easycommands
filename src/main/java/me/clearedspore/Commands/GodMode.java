@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,7 +17,10 @@ public class GodMode implements CommandExecutor {
         if (sender instanceof Player p) {
                 if (p.isInvulnerable()) {
                     p.setInvulnerable(false);
-                    p.sendMessage(ChatColor.RED + "GodMode disabled!");
+
+                    String GodEnable = Messages.get().getString("GodEnable");
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', GodEnable));
+
                     for (Player online : Bukkit.getOnlinePlayers()){
 
                         if(online.hasPermission("easycommands.logs"))
@@ -24,7 +28,10 @@ public class GodMode implements CommandExecutor {
                     }
                 } else {
                     p.setInvulnerable(true);
-                    p.sendMessage(ChatColor.GREEN + "GodMode enabled");
+
+                    String GodDisable = Messages.get().getString("GodDisable");
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', GodDisable));
+
                     for (Player online : Bukkit.getOnlinePlayers()){
 
                         if(online.hasPermission("easycommands.logs"))

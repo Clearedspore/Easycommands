@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,11 +12,12 @@ public class ClearChat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
-            p.sendMessage(ChatColor.BLUE + "You have cleared the chat!");
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.clearchat.bypass")) {
-                    online.sendMessage(ChatColor.WHITE + p.getDisplayName() + ChatColor.BLUE + " has cleared the chat!");
-                }else if (online.hasPermission(String.valueOf("easycommands.clearchat.bypass" == null))){
+                    String ClearChat = Messages.get().getString("ClearChat");
+                    ClearChat = ClearChat.replace("%player%", p.getDisplayName());
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
+                } else if (!online.hasPermission(("easycommands.clearchat.bypass"))){
                     online.sendMessage("");
                     online.sendMessage("");
                     online.sendMessage("");
@@ -106,7 +108,9 @@ public class ClearChat implements CommandExecutor {
                     online.sendMessage("");
                     online.sendMessage("");
                     online.sendMessage("");
-                    online.sendMessage(ChatColor.WHITE + p.getDisplayName() + ChatColor.BLUE + " has cleared the chat!");
+                    String ClearChat = Messages.get().getString("ClearChat");
+                    ClearChat = ClearChat.replace("%player%", p.getDisplayName());
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
                     }
                 }
             }

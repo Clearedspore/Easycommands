@@ -1,11 +1,14 @@
 package me.clearedspore.Commands.Freeze;
 
+import me.clearedspore.Files.Messages;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.*;
@@ -25,18 +28,21 @@ public class FreezeListener implements Listener {
 
         if (Frozen.contains(p)) {
             e.setCancelled(true);
-            p.sendMessage(ChatColor.RED + "You have been frozen. Don't log out or you will be cleared!");
             p.setInvulnerable(true);
             p.setGlowing(true);
             p.setAllowFlight(true);
 
-            PotionEffect effect = new PotionEffect(PotionEffectType.BLINDNESS, 99999, 1);
-            effect.apply((p));
-            PotionEffect effect2 = new PotionEffect(PotionEffectType.INVISIBILITY, 99999, 1);
-            effect2.apply((p));
-
         } else if (!Frozen.contains(p)) {
             e.setCancelled(false);
+        }
+    }
+
+    @EventHandler
+    public void OnAttack(EntityDamageEvent e){
+        Player p = (Player) e.getEntity();
+
+        if(Frozen.contains(p)){
+            e.setCancelled(true);
         }
     }
     @EventHandler
@@ -48,8 +54,6 @@ public class FreezeListener implements Listener {
             p.setInvulnerable(false);
             p.setGlowing(false);
             p.setAllowFlight(false);
-            p.removePotionEffect(PotionEffectType.BLINDNESS);
-            p.removePotionEffect(PotionEffectType.INVISIBILITY);
             Frozen.remove(p);
         }
     }
@@ -72,6 +76,28 @@ public class FreezeListener implements Listener {
         Player p = e.getPlayer();
         if(Frozen.contains(p)){
             e.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void OnBlockBreak(BlockBreakEvent e){
+        Player p = e.getPlayer();
+
+        if(Frozen.contains(p)){
+            e.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent e){
+        Player p = e.getPlayer();
+
+        if(Frozen.contains(p)){
+            if(p.hasPermission("easycommands.freeze")){
+                return;
+            } else {
+            e.setCancelled(true);
+            String FrozenCMDBlock = Messages.get().getString("FrozencmdBlock");
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenCMDBlock));
+            }
         }
     }
 }

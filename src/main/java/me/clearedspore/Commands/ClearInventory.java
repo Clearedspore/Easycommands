@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,8 +16,10 @@ public class ClearInventory implements CommandExecutor {
 
             if (args.length == 0) {
 
-                    p.sendMessage(ChatColor.BLUE + "Inventory has been cleared");
-                    p.getInventory().clear();
+                String ClearInventory = Messages.get().getString("ClearInventory");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventory));
+
+                p.getInventory().clear();
 
                 }else if(args.length == 1) {
 
@@ -30,15 +33,18 @@ public class ClearInventory implements CommandExecutor {
                         if (p.hasPermission("easycommands.clear.other")) {
 
                             target.getInventory().clear();
-                            target.sendMessage(ChatColor.BLUE + "Your inventory has been cleared by " + p.getDisplayName());
-                            p.sendMessage(ChatColor.BLUE + "You have cleard " + target.getDisplayName() + "'s inventory!");
+
+                            String ClearInventoryOther = Messages.get().getString("ClearInventoryOther");
+                            ClearInventoryOther = ClearInventoryOther.replace("%target%", target.getDisplayName());
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventoryOther));
+
                             for (Player online : Bukkit.getOnlinePlayers()) {
                                 if (online.hasPermission("easycommands.logs"))
                                     online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory off " + target.getDisplayName() + "]");
                             }
                         } else {
 
-                            if (p.hasPermission(String.valueOf("easycommands.clear.other" == null))) {
+                            if (!p.hasPermission(("easycommands.clear.other"))) {
 
                                 p.sendMessage(ChatColor.RED + "You don't have permission to clear other people their inventory!");
                             }

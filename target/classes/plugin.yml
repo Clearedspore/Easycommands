@@ -2,8 +2,6 @@ name: Easycommands
 version: '1.0-SNAPSHOT'
 main: me.clearedspore.easycommands
 api-version: '1.21'
-softdepend:
-  - Luckperms
 commands:
   clear:
     description: Clear your inventory!
@@ -14,16 +12,16 @@ commands:
       - clearinventory
   gmc:
     description: Change your gamemode to Creative!
-    permission: easycommands.creative
+    permission: easycommands.gamemode.creative
   gmsp:
     description: Change your gamemode to Spectator!
-    permission: easycommands.spectator
+    permission: easycommands.gamemode.spectator
   gma:
     description: Change your gamemode to Adventure!
-    permission: easycommands.adventure
+    permission: easycommands.gamemode.adventure
   gms:
     description: Change your gamemode to Survival!
-    permission: easycommands.survival
+    permission: easycommands.gamemode.survival
   feed:
     description: Feed yourself!
     permission: easycommands.feed
@@ -79,23 +77,18 @@ commands:
     permission: easycommands.clearchat
     aliases:
       - clc
-  customitems:
-    description: Open a gui with all customitems!
-    permission: easycommands.customitems
-    aliases:
-      - cs
-  tps:
-    description: Get the server tps
-    permission: easycommands.tps
   back:
     description: Go back to your latest death location
     permission: easycommands.back
   freeze:
     description: Freeze a player
     permission: easycommands.freeze
-  beaconshop:
-    description: Open the beaconshop
-    permission: easycommands.beaconshop.command
   invsee:
     description: Open a player's inventory
-    permission: easycommands.inventory
+    permission: easycommands.inventorysee
+  easycommands:
+    description: get some info about the plugin or reload it!
+    permission: easycommands.easycommands
+  kill:
+    description: kill yourself/other players
+    permission: easycommands.kill

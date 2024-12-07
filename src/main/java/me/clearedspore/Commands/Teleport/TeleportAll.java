@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Teleport;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,6 +18,9 @@ public class TeleportAll implements CommandExecutor {
             for(Player online : Bukkit.getOnlinePlayers()){
 
                 online.teleport(p.getLocation());
+                String Teleportall = Messages.get().getString("TeleportAll");
+                Teleportall = Teleportall.replace((CharSequence) "%online%", (CharSequence) Bukkit.getServer().getOnlinePlayers());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleportall));
             }
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.logs"))

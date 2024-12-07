@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,7 +23,11 @@ public class Invsee implements CommandExecutor {
                 p.sendMessage(ChatColor.RED + "Player is not online!");
             } else {
                 p.openInventory(target.getInventory());
-                p.sendMessage(ChatColor.BLUE+ "Opening " + ChatColor.WHITE + target.getDisplayName() + "'s" + ChatColor.BLUE + " Inventory");
+
+                String Invsee = Messages.get().getString("Invsee");
+                Invsee = Invsee.replace("%target%", target.getDisplayName());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Invsee));
+
                 for (Player online : Bukkit.getOnlinePlayers()){
                     if(online.hasPermission("easycommands.logs.admin")){
                         online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has opened " + target.getDisplayName() + "'s Inventory]");

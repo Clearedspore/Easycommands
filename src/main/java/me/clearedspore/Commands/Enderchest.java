@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,7 +26,10 @@ public class Enderchest implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "Player is not online!");
                 } else if(p.hasPermission("easycommands.enderchest.other")){
                    p.openInventory(target.getEnderChest());
-                   p.sendMessage(ChatColor.BLUE+ "Opening " + ChatColor.WHITE + target.getDisplayName() + "'s" + ChatColor.BLUE + " Enderchest");
+
+                    String EnderChestOther = Messages.get().getString("EnderChestOther");
+                    EnderChestOther = EnderChestOther.replace("%target%", target.getDisplayName());
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', EnderChestOther));
 
                     for (Player online : Bukkit.getOnlinePlayers()){
 

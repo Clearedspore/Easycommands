@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Spawn;
 
+import me.clearedspore.Files.Messages;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,7 +29,8 @@ public class Spawn implements CommandExecutor {
 
                     p.teleport(location);
 
-                    p.sendMessage(ChatColor.BLUE + "You have been teleported to spawn!");
+                    String Spawn = Messages.get().getString("Spawn");
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
 
                 }
                 if(args.length == 1) {
@@ -42,15 +44,20 @@ public class Spawn implements CommandExecutor {
                     } else if (p.hasPermission("easycommands.spawn.other")) {
 
                         target.teleport(location);
-                        target.sendMessage(ChatColor.BLUE + "You have been teleported to spawn!");
-                        p.sendMessage(ChatColor.BLUE + "You have been teleported " + ChatColor.WHITE + target.getDisplayName() + ChatColor.BLUE + " to spawn!");
+                        String Spawn = Messages.get().getString("Spawn");
+                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
+
+                        String SpawnT = Messages.get().getString("SpawnTarget");
+                        SpawnT = SpawnT.replace("%target%", target.getDisplayName());
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', SpawnT));
+
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
                                 online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");
                         }
                     } else {
 
-                        if (p.hasPermission(String.valueOf("easycommands.spawn.other" == null))) {
+                        if (!p.hasPermission(("easycommands.spawn.other"))) {
 
                             p.sendMessage(ChatColor.RED + "You don't have permission to teleport other people to spawn!");
                         }

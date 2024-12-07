@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,7 +18,9 @@ public class Back implements CommandExecutor {
             if (args.length == 0) {
                 Location DeathLocation = p.getLastDeathLocation();
                 p.teleport(DeathLocation);
-                p.sendMessage(ChatColor.BLUE + "You have been teleported back to your last death location!");
+
+                String Back = Messages.get().getString("Back");
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Back));
             } else if (args.length > 0) {
 
                 String playername = args[0];
@@ -27,11 +30,16 @@ public class Back implements CommandExecutor {
                 if (target == null) {
                     p.sendMessage(ChatColor.RED + "Player is not online!");
                 } else{
-                    if(p.hasPermission("easycommands.back.others")) {
+                    if(p.hasPermission("easycommands.back.other")) {
                         Location TargetLocation = target.getLastDeathLocation();
                         target.teleport(TargetLocation);
-                        p.sendMessage(ChatColor.BLUE + "You have teleported " + ChatColor.WHITE + target.getDisplayName() + ChatColor.BLUE + " to their last death location!");
-                        target.sendMessage(ChatColor.BLUE + "You have been teleported back to your last death location!");
+
+                        String backOther = Messages.get().getString("BackOther");
+                        backOther = backOther.replace("%target%", target.getDisplayName());
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', backOther));;
+
+                        String backT = Messages.get().getString("BackTarget");
+                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', backT));;
 
                         for (Player online : Bukkit.getOnlinePlayers()){
 
