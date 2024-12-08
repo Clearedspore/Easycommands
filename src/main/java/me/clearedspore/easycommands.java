@@ -25,6 +25,7 @@ public final class easycommands extends JavaPlugin {
     public static Set<Player> LeftFrozen = new HashSet<>();
     public static Set<Player> FlyEnabled = new HashSet<>();
     public static Set<Player> InvLooking = new HashSet<>();
+    public static Set<Player> Confirmation = new HashSet<>();
 
     public static easycommands plugin;
 
@@ -66,6 +67,7 @@ public final class easycommands extends JavaPlugin {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("easycommands").setExecutor(new Reload());
         getCommand("kill").setExecutor(new Kill());
+        getCommand("copyinventory").setExecutor(new CopyInv());
 
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
@@ -113,6 +115,7 @@ public final class easycommands extends JavaPlugin {
         Messages.get().addDefault("Repairall", "&9You have repaired your inventory!");
         Messages.get().addDefault("Kill", "&9You have killed yourself!");
         Messages.get().addDefault("KillOther", "&9You have killed &f%target%&9!");
+        Messages.get().addDefault("CopyInv", "&9You have copied &f%target%'s &9Inventory");
         Messages.get().options().copyDefaults(true);
         Messages.save();
 

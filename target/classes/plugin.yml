@@ -1,5 +1,5 @@
 name: Easycommands
-version: '1.0-SNAPSHOT'
+version: '1.2'
 main: me.clearedspore.easycommands
 api-version: '1.21'
 commands:
@@ -92,3 +92,8 @@ commands:
   kill:
     description: kill yourself/other players
     permission: easycommands.kill
+  copyinventory:
+    description: copy a player's inventory and give it to yourself
+    permission: easycommands.copyinventory
+    aliases:
+      - copyinv
