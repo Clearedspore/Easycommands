@@ -17,103 +17,22 @@ public class ClearChat implements CommandExecutor {
                     String ClearChat = Messages.get().getString("ClearChat");
                     ClearChat = ClearChat.replace("%player%", p.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
-                } else if (!online.hasPermission(("easycommands.clearchat.bypass"))){
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
-                    online.sendMessage("");
+                } else if (!online.hasPermission(("easycommands.clearchat.bypass"))) {
+
+                    clearPlayerChat(online);
+
                     String ClearChat = Messages.get().getString("ClearChat");
                     ClearChat = ClearChat.replace("%player%", p.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
-                    }
                 }
             }
+        }
         return true;
+    }
+
+    private void clearPlayerChat(Player target) {
+        for (int i = 0; i < 100; i++) {
+            target.sendMessage("");
+        }
     }
 }

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class WarpCommand implements CommandExecutor {
+public class WarpCommand implements CommandExecutor, Listener {
     private final WarpManager warpManager;
 
     public WarpCommand(WarpManager warpManager) {

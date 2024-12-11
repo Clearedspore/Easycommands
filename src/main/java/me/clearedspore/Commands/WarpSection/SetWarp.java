@@ -17,7 +17,7 @@ public class SetWarp implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player p){
+        if (!(sender instanceof Player)) {
             sender.sendMessage("Only players can set warps!");
             return true;
         }
