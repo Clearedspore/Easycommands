@@ -14,11 +14,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinLeaveListener implements Listener {
 
-    public JoinLeaveListener(easycommands easycommands) {
+    private final easycommands plugin;
+
+    public JoinLeaveListener(easycommands plugin) {
+        this.plugin = plugin;
     }
 
     @EventHandler
-    public void OnJoin(PlayerJoinEvent e){
+    public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if(p.hasPermission("easycommands.staff")) {
             for (Player online : Bukkit.getOnlinePlayers()) {
@@ -29,7 +32,8 @@ public class JoinLeaveListener implements Listener {
                     online.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
                 }
             }
-        } else return;
+        }
+
     }
     @EventHandler
     public void OnLeave(PlayerQuitEvent e){

@@ -1,10 +1,10 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.WarpSection.WarpManager;
 import me.clearedspore.Files.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reload implements TabExecutor {
+
+    private final WarpManager warpManager;
+    public Reload(WarpManager warpManager) {
+        this.warpManager = warpManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
@@ -23,6 +29,7 @@ public class Reload implements TabExecutor {
                 switch (args[0]) {
                     case "reload":
                         Messages.reload();
+                        warpManager.reloadWarps();
                         String Reload = Messages.get().getString("Reload");
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Reload));
                         for (Player online : Bukkit.getOnlinePlayers()){

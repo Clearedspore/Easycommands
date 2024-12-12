@@ -1,12 +1,10 @@
-package me.clearedspore.Commands.WarpSection;
+package me.clearedspore.WarpSection;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.awt.event.WindowStateListener;
 
 public class SetWarp implements CommandExecutor {
 

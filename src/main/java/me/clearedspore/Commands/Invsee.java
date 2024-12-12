@@ -20,6 +20,7 @@ public class Invsee implements CommandExecutor {
             p.openInventory(target.getInventory());
 
             String invSee = Messages.get().getString("Invsee");
+            invSee = invSee.replace("%target%", target.getDisplayName());
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', invSee));
 
         }

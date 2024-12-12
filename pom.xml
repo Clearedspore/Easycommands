@@ -6,7 +6,7 @@
 
     <groupId>me.clearedspore.easycommands</groupId>
     <artifactId>Easycommands</artifactId>
-    <version>1.2</version>
+    <version>1.4</version>
     <packaging>jar</packaging>
 
     <name>Easycommands</name>
@@ -74,5 +74,10 @@
                 <version>5.4</version>
                 <scope>provided</scope>
             </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version> <!-- Ensure you have the correct version -->
+        </dependency>
     </dependencies>
 </project>

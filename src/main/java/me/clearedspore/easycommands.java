@@ -10,10 +10,10 @@ import me.clearedspore.Commands.Spawn.Spawn;
 import me.clearedspore.Commands.Teleport.Teleport;
 import me.clearedspore.Commands.Teleport.TeleportAll;
 import me.clearedspore.Commands.Teleport.tphere;
-import me.clearedspore.Commands.WarpSection.*;
+import me.clearedspore.Listeners.PlayerJoinListener;
+import me.clearedspore.WarpSection.*;
 import me.clearedspore.Files.Messages;
 import me.clearedspore.Listeners.JoinLeaveListener;
-import me.clearedspore.Listeners.UpdateJoin;
 import me.clearedspore.Listeners.SpawnListener;
 import me.clearedspore.Utils.UpdateChecker;
 import org.bukkit.entity.Player;
@@ -25,7 +25,8 @@ import java.util.Set;
 
 public final class easycommands extends JavaPlugin {
 
-    private String latestVersion;
+    private UpdateChecker updateChecker;
+
 
     public static Set<Player> Frozen = new HashSet<>();
     public static Set<Player> LeftFrozen = new HashSet<>();
@@ -41,12 +42,6 @@ public final class easycommands extends JavaPlugin {
     public static easycommands getPlugin() {
         return plugin;
     }
-    public static Plugin getInstance() {
-        return instance;
-    }
-    public String getLatestVersion() {
-        return latestVersion;
-    }
 
 
     @Override
@@ -58,18 +53,12 @@ public final class easycommands extends JavaPlugin {
         System.out.println("EasyCommands has loaded!");
         System.out.println("A plugin full off commands");
 
-        new UpdateChecker(this, 121185).getLatestVersion(version -> {
-            if (version != null) {
-                latestVersion = version;
-                if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                    getLogger().info("Plugin is up to date!");
-                } else {
-                    getLogger().warning("Plugin is not up to date!");
-                }
-            } else {
-                getLogger().warning("Failed to fetch the latest version.");
-            }
-        });
+        int resourceId = 121185;
+        updateChecker = new UpdateChecker(this, resourceId);
+        updateChecker.checkForUpdates();
+
+        // Register the PlayerJoinListener
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(updateChecker), this);
 
         getCommand("clear").setExecutor(new ClearInventory());
         getCommand("gmc").setExecutor(new CreativeMode());
@@ -92,7 +81,7 @@ public final class easycommands extends JavaPlugin {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("back").setExecutor(new Back());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("easycommands").setExecutor(new Reload());
+        getCommand("easycommands").setExecutor(new Reload(warpManager));
         getCommand("kill").setExecutor(new Kill());
         getCommand("copyinventory").setExecutor(new CopyInv());
         getCommand("invsee").setExecutor(new Invsee());
@@ -104,10 +93,11 @@ public final class easycommands extends JavaPlugin {
         getCommand("delwarp").setTabCompleter(new WarpTabCompleter(warpManager));
         getCommand("delwarpall").setExecutor(new DelwarpAll(warpManager));
 
+
+
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new FreezeListener(this), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
-        getServer().getPluginManager().registerEvents(new UpdateJoin(this), this);
         getServer().getPluginManager().registerEvents(new WarpCommand(warpManager), this);
 
         getConfig().options().copyDefaults();

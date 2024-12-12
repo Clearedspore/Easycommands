@@ -1,4 +1,4 @@
-package me.clearedspore.Commands.WarpSection;
+package me.clearedspore.WarpSection;
 
 import me.clearedspore.easycommands;
 import org.bukkit.Location;
@@ -86,5 +86,19 @@ public class WarpManager {
         return warps.keySet();
     }
 
+    public void reloadWarps() {
+
+        plugin.reloadConfig();
+        FileConfiguration warpsConfig = YamlConfiguration.loadConfiguration(warpsFile);
+
+        warps.clear();
+
+        for (String warpName : warpsConfig.getKeys(false)) {
+            Location location = warpsConfig.getLocation(warpName);
+            if (location != null) {
+                warps.put(warpName, location);
+            }
+        }
+    }
 }
 

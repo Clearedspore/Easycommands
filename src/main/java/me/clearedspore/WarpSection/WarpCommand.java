@@ -1,4 +1,4 @@
-package me.clearedspore.Commands.WarpSection;
+package me.clearedspore.WarpSection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

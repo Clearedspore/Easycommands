@@ -1,7 +1,8 @@
 name: Easycommands
-version: '1.21'
+"id": 121185,
+version: ${project.version}
 main: me.clearedspore.easycommands
-api-version: '1.3'
+api-version: '1.21'
 commands:
   clear:
     description: Clear your inventory!
@@ -117,3 +118,7 @@ permissions:
   easycommands.warp.warp.*:
     description: Access to all warps!
     default: false
+  easycommands.update:
+    description: get a notification when there is a new update!
+    default: false
+
