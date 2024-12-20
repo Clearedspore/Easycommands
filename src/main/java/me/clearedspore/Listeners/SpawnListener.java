@@ -1,6 +1,6 @@
 package me.clearedspore.Listeners;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.easycommands;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,9 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.potion.PotionEffectType;
-
-import static me.clearedspore.easycommands.LeftFrozen;
 
 public class SpawnListener implements Listener {
 

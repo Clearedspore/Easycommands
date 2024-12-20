@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,6 +23,7 @@ public class Nick implements CommandExecutor {
                 Nick = Nick.replace("%nickname%", args[0]);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Nick));
 
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has nicked themself as " + args[0]);
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[Server: " + p.getName() + " has nicked themself as " + args[0] + "]");
@@ -38,6 +40,7 @@ public class Nick implements CommandExecutor {
                 String Unnick = Messages.get().getString("UnNick");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Unnick));
 
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unnicked themself");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has unnicked themself]");

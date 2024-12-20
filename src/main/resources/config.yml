@@ -1,3 +1,4 @@
 # Config is empty for now. It only contains spawn if you did /setspawn ingame.
 # There will be more things added later!
 # If you want to change the messages you can go to the messages file!
+updatechecker: true # or false to disable

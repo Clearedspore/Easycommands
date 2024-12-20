@@ -11,13 +11,13 @@ import me.clearedspore.Commands.Teleport.Teleport;
 import me.clearedspore.Commands.Teleport.TeleportAll;
 import me.clearedspore.Commands.Teleport.tphere;
 import me.clearedspore.Listeners.PlayerJoinListener;
+import me.clearedspore.Logs.GetLogsCommand;
 import me.clearedspore.WarpSection.*;
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Listeners.JoinLeaveListener;
 import me.clearedspore.Listeners.SpawnListener;
 import me.clearedspore.Utils.UpdateChecker;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
@@ -34,10 +34,13 @@ public final class easycommands extends JavaPlugin {
     public static Set<Player> InvLooking = new HashSet<>();
     public static Set<Player> Confirmation = new HashSet<>();
 
-    private static easycommands instance;
     public static easycommands plugin;
 
     private WarpManager warpManager;
+
+    public UpdateChecker getUpdateChecker() {
+        return updateChecker;
+    }
 
     public static easycommands getPlugin() {
         return plugin;
@@ -58,7 +61,7 @@ public final class easycommands extends JavaPlugin {
         updateChecker.checkForUpdates();
 
         // Register the PlayerJoinListener
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(updateChecker), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(updateChecker, this), this);
 
         getCommand("clear").setExecutor(new ClearInventory());
         getCommand("gmc").setExecutor(new CreativeMode());
@@ -81,10 +84,12 @@ public final class easycommands extends JavaPlugin {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("back").setExecutor(new Back());
         getCommand("freeze").setExecutor(new Freeze());
-        getCommand("easycommands").setExecutor(new Reload(warpManager));
+        this.getCommand("easycommands").setExecutor(new Reload(warpManager, this));
         getCommand("kill").setExecutor(new Kill());
         getCommand("copyinventory").setExecutor(new CopyInv());
         getCommand("invsee").setExecutor(new Invsee());
+        getCommand("getlogs").setExecutor(new GetLogsCommand());
+        getCommand("getlogs").setTabCompleter(new GetLogsCommand());
 
         getCommand("setwarp").setExecutor(new SetWarp(warpManager));
         getCommand("warp").setExecutor(new WarpCommand(warpManager));
@@ -119,7 +124,7 @@ public final class easycommands extends JavaPlugin {
         Messages.get().addDefault("Teleport", "&9Teleporting to &f%target%");
         Messages.get().addDefault("TeleportOthers", "&9Teleporting &f%playertosend% &9to &f%target%");
         Messages.get().addDefault("TeleportHere", "&9Teleporting &f%playertosend% &9to yourself");
-        Messages.get().addDefault("TeleportAll","&9Teleporting &f%online% &9players to you!");
+        Messages.get().addDefault("TeleportAll","&9Teleporting &f%online% &9players(s) to you!");
         Messages.get().addDefault("Back","&9Teleporting back to your last death location!");
         Messages.get().addDefault("BackTarget","&9Teleporting back to your last death location!");
         Messages.get().addDefault("BackOther","&9Teleporting &f%target% &fto their last death location");
@@ -142,6 +147,10 @@ public final class easycommands extends JavaPlugin {
         Messages.get().addDefault("Kill", "&9You have killed yourself!");
         Messages.get().addDefault("KillOther", "&9You have killed &f%target%&9!");
         Messages.get().addDefault("CopyInv", "&9You have copied &f%target%'s &9Inventory");
+        Messages.get().addDefault("setwarp", "&9You have created the %warpname% warp");
+        Messages.get().addDefault("warp", "&9You have been teleported to %warpname%");
+
+
         Messages.get().options().copyDefaults(true);
         Messages.save();
 

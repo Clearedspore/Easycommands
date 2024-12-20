@@ -1,5 +1,6 @@
 package me.clearedspore.WarpSection;
 
+import me.clearedspore.ConfigFiles.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -46,7 +47,9 @@ public class WarpCommand implements CommandExecutor, Listener {
         if(p.hasPermission("easycommands.warp.warp." + warpName)) {
             if(location != null) {
                 p.teleport(warpManager.getWarp(warpName));
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9You have been teleported to &f" + warpName));
+                String warp = Messages.get().getString("warp");
+                warp = warp.replace("%warpname%", warpName);
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', warp));
                 return true;
             } else {
                 p.sendMessage(ChatColor.RED + "Warp does not exist!");
@@ -171,7 +174,9 @@ public class WarpCommand implements CommandExecutor, Listener {
             if(p.hasPermission("easycommands.warp.warp." + warpName)){
                 if (warpLocation != null) {
                     p.teleport(warpLocation);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9You have been teleported to &f" + warpName));
+                    String warp = Messages.get().getString("warp");
+                    warp = warp.replace("%warpname%", warpName);
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', warp));
                 } else {
                     p.sendMessage(ChatColor.RED + "Warp not found!");
                 }

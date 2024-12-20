@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Teleport;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,6 +25,7 @@ public class Teleport implements CommandExecutor {
                 Teleport = Teleport.replace("%target%", target.getDisplayName());
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported to " + target.getDisplayName());
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " teleported to " + target.getDisplayName() + "]");
@@ -41,6 +43,7 @@ public class Teleport implements CommandExecutor {
                         Teleport = Teleport.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
+                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName());
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
                                 online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName() + "]");

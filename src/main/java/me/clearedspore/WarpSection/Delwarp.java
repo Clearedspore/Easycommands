@@ -1,5 +1,7 @@
 package me.clearedspore.WarpSection;
 
+import me.clearedspore.Logs.LogManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,19 +17,25 @@ public class Delwarp implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player p)){
+        if (!(sender instanceof Player p)) {
             sender.sendMessage("You can only remove a warp ingame!");
             return true;
         }
 
-        if(args.length != 1){
+        if (args.length != 1) {
             p.sendMessage(ChatColor.RED + "ERROR: Usage: /delwarp (name)");
             return true;
         }
 
         String warpName = args[0];
-        warpManager.removeWarp(warpName);
-        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9Removed &f" + warpName + " &9warp"));
+        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has deleted the " + warpName + " warp");
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            if (online.hasPermission("easycommands.logs")) {
+                online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has deleted the " + warpName + " warp]");
+            }
+            warpManager.removeWarp(warpName);
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9Removed &f" + warpName + " &9warp"));
+        }
         return true;
     }
 }

@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -38,9 +39,10 @@ public class ClearInventory implements CommandExecutor {
                             ClearInventoryOther = ClearInventoryOther.replace("%target%", target.getDisplayName());
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventoryOther));
 
+                            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has cleared the inventory of " + target.getDisplayName());
                             for (Player online : Bukkit.getOnlinePlayers()) {
                                 if (online.hasPermission("easycommands.logs"))
-                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory off " + target.getDisplayName() + "]");
+                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory of " + target.getDisplayName() + "]");
                             }
                         } else {
 

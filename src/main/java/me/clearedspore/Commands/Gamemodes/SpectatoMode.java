@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Gamemodes;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -8,8 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.concurrent.Executor;
 
 public class SpectatoMode implements CommandExecutor {
     @Override
@@ -22,6 +21,8 @@ public class SpectatoMode implements CommandExecutor {
                 GameMode = GameMode.replace("%gamemode%", "Spectator");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
+
+                LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has changed their gamemode to Spectator");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Spectator]");
@@ -47,6 +48,8 @@ public class SpectatoMode implements CommandExecutor {
                         GameMode = GameMode.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
+
+                        LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Changed " + target.getDisplayName() + "'s gamemode to Spectator");
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
                                 online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed the gamemode off " + target.getDisplayName() + " to Spectator]");

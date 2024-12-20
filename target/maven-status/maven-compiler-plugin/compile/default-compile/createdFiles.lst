@@ -6,6 +6,7 @@ me\clearedspore\Commands\GodMode.class
 me\clearedspore\WarpSection\SetWarp.class
 me\clearedspore\Commands\ClearChat.class
 me\clearedspore\Commands\Spawn\SetSpawn.class
+me\clearedspore\Logs\LogManager$LogEntry.class
 me\clearedspore\Commands\Gamemodes\SpectatoMode.class
 me\clearedspore\easycommands.class
 me\clearedspore\Commands\Invsee.class
@@ -18,8 +19,11 @@ me\clearedspore\Commands\CopyInv.class
 me\clearedspore\Commands\Kill.class
 me\clearedspore\WarpSection\WarpTabCompleter.class
 me\clearedspore\Commands\Teleport\TeleportAll.class
+me\clearedspore\Logs\GetLogsCommand.class
+me\clearedspore\Logs\TimeUtils.class
 me\clearedspore\Listeners\SpawnListener.class
 me\clearedspore\WarpSection\Delwarp.class
+me\clearedspore\Logs\LogManager.class
 me\clearedspore\Commands\ClearInventory.class
 me\clearedspore\Listeners\PlayerJoinListener.class
 me\clearedspore\WarpSection\WarpManager.class
@@ -32,6 +36,6 @@ me\clearedspore\WarpSection\WarpCommand.class
 me\clearedspore\Commands\Gamemodes\SurvivalMode.class
 me\clearedspore\Commands\Feed.class
 me\clearedspore\Commands\Teleport\tphere.class
+me\clearedspore\ConfigFiles\Messages.class
 me\clearedspore\Commands\Freeze\Freeze.class
-me\clearedspore\Files\Messages.class
 me\clearedspore\Commands\Repair.class

@@ -1,4 +1,4 @@
-package me.clearedspore.Files;
+package me.clearedspore.ConfigFiles;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -33,16 +33,15 @@ public class Messages {
         HeaderText.add("If you want to edit a message but its not in the list then you can't edit it since you don't need to or the code will break.");
         HeaderText.add("Placeholders:");
         HeaderText.add(" %target% A player target ex: /tp player (player is the target)");
-        HeaderText.add("%onlin% Gets all the online players. Only works for tpall");
+        HeaderText.add(" %online% Gets all the online players. Only works for tpall");
         HeaderText.add(" %gamemode% THIS IS ONLY FOR THE GAMEMODE MESSAGES. If you use this in a different messages it wil just return %gamemode%");
         HeaderText.add(" %playertosend% this is only for the /tp and ONLY if you use 2 arguments. Ex: /tp player1 player2. You want to send player1 so that is %playertosend% and then %target% for player 2");
         HeaderText.add(" %nickname% This is ONLY used for the nickname message. It is a placeholder for what nickname the player has chosen");
-        HeaderText.add("If you want to edit log messages you can edit those in logmessages.");
+        HeaderText.add(" %warpname% This is the warpname a player has set/warped to");
         HeaderText.add("Good luck editing the messages.");
         MessagesFile.options().setHeader((HeaderText));
 
         List<String> LowerText = new ArrayList<>();
-        LowerText.add("If you want to edit the log messages open the logmessages file");
         MessagesFile.options().setFooter(LowerText);
     }
 

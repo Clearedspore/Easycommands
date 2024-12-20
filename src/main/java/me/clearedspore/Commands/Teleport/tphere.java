@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Teleport;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,6 +24,9 @@ public class tphere implements CommandExecutor {
                 String Teleport = Messages.get().getString("Teleport");
                 Teleport = Teleport.replace("%target%", target.getDisplayName());
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
+
+
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + " has teleported" + target.getDisplayName() + " to themself");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to themself]");

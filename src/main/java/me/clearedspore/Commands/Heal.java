@@ -1,17 +1,13 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.C;
-
-import java.awt.*;
 
 public class Heal implements CommandExecutor {
     @Override
@@ -27,10 +23,10 @@ public class Heal implements CommandExecutor {
                 String Heal = Messages.get().getString("Heal");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Heal));
 
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has healed themself");
                 for (Player online : Bukkit.getOnlinePlayers()){
-
                     if(online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed himself]");
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed themself]");
                 }
             }else{
 
@@ -50,8 +46,8 @@ public class Heal implements CommandExecutor {
                         HealOther = HealOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', HealOther));
 
+                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has healed" + target.getDisplayName());
                         for (Player online : Bukkit.getOnlinePlayers()) {
-
                             if (online.hasPermission("easycommands.logs")) {
                                 online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed " + target.getDisplayName() + "]");
                             }

@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,7 +24,13 @@ public class Invsee implements CommandExecutor {
             invSee = invSee.replace("%target%", target.getDisplayName());
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', invSee));
 
+            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " is looking in " + target.getDisplayName() + "'s inventory");
+            for (Player online : Bukkit.getOnlinePlayers()) {
+                if (online.hasPermission("easycommands.logs.admin")) {
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " is looking in " + target.getDisplayName() + "'s inventory]");
+                }
         }
+    }
         return true;
     }
 }

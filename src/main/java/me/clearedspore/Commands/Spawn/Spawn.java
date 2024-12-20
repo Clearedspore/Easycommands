@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Spawn;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -51,6 +52,7 @@ public class Spawn implements CommandExecutor {
                         SpawnT = SpawnT.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', SpawnT));
 
+                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported " + target.getDisplayName() + " to spawn");
                         for (Player online : Bukkit.getOnlinePlayers()) {
                             if (online.hasPermission("easycommands.logs"))
                                 online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");

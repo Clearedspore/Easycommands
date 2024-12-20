@@ -23,11 +23,14 @@ C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Spawn\Spawn.j
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Teleport\Teleport.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Teleport\TeleportAll.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Teleport\tphere.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\ConfigFiles\Messages.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\easycommands.java
-C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Files\Messages.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\JoinLeaveListener.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\PlayerJoinListener.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\SpawnListener.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\GetLogsCommand.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\LogManager.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\TimeUtils.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Utils\UpdateChecker.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\WarpSection\Delwarp.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\WarpSection\DelwarpAll.java

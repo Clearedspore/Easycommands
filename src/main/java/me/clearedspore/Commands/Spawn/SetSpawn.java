@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Spawn;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,6 +30,8 @@ public class SetSpawn implements CommandExecutor {
 
             String SetSpawn = Messages.get().getString("SetSpawn");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', SetSpawn));
+
+            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has set a new spawn ");
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.logs"))
                     online.sendMessage(ChatColor.GRAY + "[ " + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has set a new spawn]");

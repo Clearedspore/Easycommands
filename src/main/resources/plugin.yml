@@ -114,11 +114,24 @@ commands:
     description: delete all the warps. THIS CAN ONLY BE DONE TROUGH CONSOLE!
     usage: /delwarpall
     permission: easycommands.warp.delwarpall
+  getlogs:
+    description: Get the logs off a player
+    usage: /getlogs
+    permission: easycommands.getlogs
 permissions:
   easycommands.warp.warp.*:
     description: Access to all warps!
     default: false
   easycommands.update:
     description: get a notification when there is a new update!
+    default: false
+  easycommands.logs.admin:
+    description: Logs for admins
+    default: false
+  easycommands.staff:
+    description: General permissions for staff
+    default: false
+  easycommands.freeze.cmdblock:
+    description: Bypass the cmd block
     default: false
 

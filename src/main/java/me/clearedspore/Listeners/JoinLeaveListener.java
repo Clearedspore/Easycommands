@@ -1,7 +1,6 @@
 package me.clearedspore.Listeners;
 
-import me.clearedspore.Files.Messages;
-import me.clearedspore.Utils.UpdateChecker;
+import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

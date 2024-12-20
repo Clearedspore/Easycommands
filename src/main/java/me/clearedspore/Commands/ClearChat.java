@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,6 +13,8 @@ public class ClearChat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
+
+            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has cleared the chat");
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.clearchat.bypass")) {
                     String ClearChat = Messages.get().getString("ClearChat");

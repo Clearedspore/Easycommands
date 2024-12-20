@@ -1,6 +1,7 @@
 package me.clearedspore.Commands.Teleport;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,18 +14,20 @@ public class TeleportAll implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
 
-            p.sendMessage(ChatColor.BLUE + "You have teleported every online player to you!");
+            String players = String.valueOf(Bukkit.getOnlinePlayers().size());
 
             for(Player online : Bukkit.getOnlinePlayers()){
 
                 online.teleport(p.getLocation());
                 String Teleportall = Messages.get().getString("TeleportAll");
-                Teleportall = Teleportall.replace((CharSequence) "%online%", (CharSequence) Bukkit.getServer().getOnlinePlayers());
+                Teleportall = Teleportall.replace("%online%", players);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleportall));
             }
+
+            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported all players to themself");
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.logs"))
-                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported all players to him]");
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported all players to themself]");
             }
         }
         return true;

@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,6 +37,12 @@ public class Kill implements CommandExecutor {
                         KillOther = KillOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', KillOther));
 
+                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has killed " + target.getDisplayName());
+                        for (Player online : Bukkit.getOnlinePlayers()) {
+                            if (online.hasPermission("easycommands.logs")) {
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has killed " + target.getDisplayName() + "]");
+                            }
+                        }
                     }else{
                         if (!p.hasPermission(("easycommands.kill.other"))){
                             p.sendMessage(ChatColor.RED + "You don't have permission to feed other people!");

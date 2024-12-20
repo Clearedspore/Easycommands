@@ -1,8 +1,7 @@
 package me.clearedspore.Commands.Freeze;
 
-import me.clearedspore.Files.Messages;
+import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.easycommands;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,8 +11,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import static me.clearedspore.easycommands.Frozen;
 
@@ -91,7 +88,7 @@ public class FreezeListener implements Listener {
         Player p = e.getPlayer();
 
         if(Frozen.contains(p)){
-            if(p.hasPermission("easycommands.freeze")){
+            if(p.hasPermission("easycommands.freeze.cmdbypass")){
                 return;
             } else {
             e.setCancelled(true);

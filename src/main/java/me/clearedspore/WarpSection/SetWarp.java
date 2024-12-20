@@ -1,5 +1,8 @@
 package me.clearedspore.WarpSection;
 
+import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Logs.LogManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +12,7 @@ import org.bukkit.entity.Player;
 public class SetWarp implements CommandExecutor {
 
     private final WarpManager warpManager;
+
     public SetWarp(WarpManager warpManager) {
         this.warpManager = warpManager;
     }
@@ -21,16 +25,25 @@ public class SetWarp implements CommandExecutor {
         }
 
 
-        Player player = (Player) sender;
+        Player p = (Player) sender;
         if (args.length != 1) {
-            player.sendMessage("Usage: /setwarp <name>");
+            p.sendMessage("Usage: /setwarp <name>");
             return true;
         }
 
         String warpName = args[0];
-        warpManager.setWarp(warpName, player.getLocation());
-        player.sendMessage(ChatColor.BLUE + "Warp " + ChatColor.WHITE + warpName + ChatColor.BLUE + " set successfully!");
-        return true;
+        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has created the " + warpName + " warp");
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            if (online.hasPermission("easycommands.logs")) {
+                online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has created the " + warpName + " warp]");
+            }
+
+            warpManager.setWarp(warpName, p.getLocation());
+            String setwarp = Messages.get().getString("setwarp");
+            setwarp = setwarp.replace("%warpname%", warpName);
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', setwarp));
         }
+        return true;
     }
+}
 
