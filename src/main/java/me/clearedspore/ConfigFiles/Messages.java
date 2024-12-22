@@ -32,6 +32,7 @@ public class Messages {
         HeaderText.add("Here are all the messages off the plugin that you can edit.");
         HeaderText.add("If you want to edit a message but its not in the list then you can't edit it since you don't need to or the code will break.");
         HeaderText.add("Placeholders:");
+        HeaderText.add(" NOTE: m means maintenance");
         HeaderText.add(" %target% A player target ex: /tp player (player is the target)");
         HeaderText.add(" %online% Gets all the online players. Only works for tpall");
         HeaderText.add(" %gamemode% THIS IS ONLY FOR THE GAMEMODE MESSAGES. If you use this in a different messages it wil just return %gamemode%");

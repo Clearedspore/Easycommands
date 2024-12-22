@@ -10,13 +10,17 @@ import me.clearedspore.Commands.Spawn.Spawn;
 import me.clearedspore.Commands.Teleport.Teleport;
 import me.clearedspore.Commands.Teleport.TeleportAll;
 import me.clearedspore.Commands.Teleport.tphere;
-import me.clearedspore.Listeners.PlayerJoinListener;
+import me.clearedspore.Listeners.CheckerListener;
 import me.clearedspore.Logs.GetLogsCommand;
+import me.clearedspore.MaintenanceSection.MaintenanceCommand;
+import me.clearedspore.MaintenanceSection.MaintenanceJoinListener;
+import me.clearedspore.MaintenanceSection.MaintenanceManager;
 import me.clearedspore.WarpSection.*;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Listeners.JoinLeaveListener;
-import me.clearedspore.Listeners.SpawnListener;
+import me.clearedspore.Listeners.JoinListener;
 import me.clearedspore.Utils.UpdateChecker;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,12 +30,10 @@ import java.util.Set;
 public final class easycommands extends JavaPlugin {
 
     private UpdateChecker updateChecker;
+    private MaintenanceManager maintenanceManager;
 
 
     public static Set<Player> Frozen = new HashSet<>();
-    public static Set<Player> LeftFrozen = new HashSet<>();
-    public static Set<Player> FlyEnabled = new HashSet<>();
-    public static Set<Player> InvLooking = new HashSet<>();
     public static Set<Player> Confirmation = new HashSet<>();
 
     public static easycommands plugin;
@@ -46,12 +48,19 @@ public final class easycommands extends JavaPlugin {
         return plugin;
     }
 
+    @Override
+    public void onLoad() {
+        // Ensure the config file is loaded but not overwritten
+        saveDefaultConfig();
+    }
 
     @Override
     public void onEnable() {
         // Plugin startup logic
 
+
         warpManager = new WarpManager(this);
+        maintenanceManager = new MaintenanceManager(this);
 
         System.out.println("EasyCommands has loaded!");
         System.out.println("A plugin full off commands");
@@ -61,7 +70,7 @@ public final class easycommands extends JavaPlugin {
         updateChecker.checkForUpdates();
 
         // Register the PlayerJoinListener
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(updateChecker, this), this);
+        getServer().getPluginManager().registerEvents(new CheckerListener(updateChecker, this), this);
 
         getCommand("clear").setExecutor(new ClearInventory());
         getCommand("gmc").setExecutor(new CreativeMode());
@@ -84,12 +93,13 @@ public final class easycommands extends JavaPlugin {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("back").setExecutor(new Back());
         getCommand("freeze").setExecutor(new Freeze());
-        this.getCommand("easycommands").setExecutor(new Reload(warpManager, this));
+        getCommand("easycommands").setExecutor(new Reload(warpManager, this));
         getCommand("kill").setExecutor(new Kill());
         getCommand("copyinventory").setExecutor(new CopyInv());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("getlogs").setExecutor(new GetLogsCommand());
         getCommand("getlogs").setTabCompleter(new GetLogsCommand());
+        getCommand("kick").setExecutor(new Kick());
 
         getCommand("setwarp").setExecutor(new SetWarp(warpManager));
         getCommand("warp").setExecutor(new WarpCommand(warpManager));
@@ -98,9 +108,11 @@ public final class easycommands extends JavaPlugin {
         getCommand("delwarp").setTabCompleter(new WarpTabCompleter(warpManager));
         getCommand("delwarpall").setExecutor(new DelwarpAll(warpManager));
 
+        getCommand("maintenance").setExecutor(new MaintenanceCommand(this, maintenanceManager));
+        getCommand("maintenance").setTabCompleter(new MaintenanceCommand(this, maintenanceManager));
+        getServer().getPluginManager().registerEvents(new MaintenanceJoinListener(this, maintenanceManager), this);
 
-
-        getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
         getServer().getPluginManager().registerEvents(new FreezeListener(this), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
         getServer().getPluginManager().registerEvents(new WarpCommand(warpManager), this);
@@ -149,6 +161,11 @@ public final class easycommands extends JavaPlugin {
         Messages.get().addDefault("CopyInv", "&9You have copied &f%target%'s &9Inventory");
         Messages.get().addDefault("setwarp", "&9You have created the %warpname% warp");
         Messages.get().addDefault("warp", "&9You have been teleported to %warpname%");
+        Messages.get().addDefault("mon", "&9Maintenance has been turned on");
+        Messages.get().addDefault("moff", "&9Maintenance has been turned off");
+        Messages.get().addDefault("madd", "&9%target% has been added to the maintenance whitelist");
+        Messages.get().addDefault("mremove", "&9%target% has been removed from the maintenance whitelist");
+        Messages.get().addDefault("mkickall", "&9All online players have been kicked!");
 
 
         Messages.get().options().copyDefaults(true);

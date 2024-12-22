@@ -1,4 +1,43 @@
-# Config is empty for now. It only contains spawn if you did /setspawn ingame.
-# There will be more things added later!
-# If you want to change the messages you can go to the messages file!
+#=====================================
+#      Easycommands!
+#=====================================
+#Easycommands is a replacement for Essentials/CMI/Sunlight. And it is free!
+#I am working very hard on special features we already have a warp feature with a gui and so many commands.
+#The config hasn't really a lot off stuff in it only spawn and the updatecheceker. I am working hard for more customization.
+#Soon there will be a big config update where a lot off things are editable in the config!
+
+
 updatechecker: true # or false to disable
+
+#here is the spawn location when you have set a span with /setspawn.
+spawn:
+  ==: org.bukkit.Location
+  world: world
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 90.0
+  yaw: 90.0
+
+#Settings for when a player joins
+#everything is when the player joins
+SpawnTP: true #If the player should be teleported to spawn when they join
+Heal: true # if the player gets healed when they join
+Title: true # If the player sees a title when they join
+TitleText: "&c&lWelcome %player%!" # What the Title says when Title has been enabled.
+
+#Maintenance Function
+#This is a sort of whitelist but better!
+#You can add/remove players, Kick all the players that are not added with /maintenance add, kick message, join message. And more!
+#You can edit it below.
+maintenance: false #Enable/Disable the maintenance
+kick-message: "&cStaff members have enabled maintenance" #Message players get when they get kicked
+join-denied-message: # Message the player get when they try to join while maintenance is enabled
+  - "&cMaintenance Enabled"
+  - "&c"
+  - "&fStaff has enabled maintenance, you can't join."
+  - "&fGet more info about the server in our Discord!"
+whitelist: #Players that can join while maintenance is enabled
+  - player1
+  - player2
+

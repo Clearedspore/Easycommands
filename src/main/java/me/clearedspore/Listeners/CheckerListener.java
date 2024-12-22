@@ -1,19 +1,18 @@
 package me.clearedspore.Listeners;
 
 import me.clearedspore.Utils.UpdateChecker;
-import me.clearedspore.easycommands;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PlayerJoinListener implements Listener {
+public class CheckerListener implements Listener {
     private final UpdateChecker updateChecker;
     private final boolean updateCheckerEnabled;
 
 
-    public PlayerJoinListener(UpdateChecker updateChecker, JavaPlugin plugin) {
+    public CheckerListener(UpdateChecker updateChecker, JavaPlugin plugin) {
         this.updateChecker = updateChecker;
         this.updateCheckerEnabled = plugin.getConfig().getBoolean("updatechecker", true);
     }

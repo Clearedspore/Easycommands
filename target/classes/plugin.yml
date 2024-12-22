@@ -1,6 +1,6 @@
 name: Easycommands
 "id": 121185,
-version: 1.5
+version: 1.6
 main: me.clearedspore.easycommands
 api-version: '1.21'
 commands:
@@ -116,8 +116,16 @@ commands:
     permission: easycommands.warp.delwarpall
   getlogs:
     description: Get the logs off a player
-    usage: /getlogs
+    usage: /getlogs <player>
     permission: easycommands.getlogs
+  kick:
+    description: Kick someone
+    permission: easycommands.kick
+    usage: /kick <player>
+  maintenance:
+    description: Maintenance function!
+    permission: easycommands.maintenance
+    usage: /maintenance <arguments>
 permissions:
   easycommands.warp.warp.*:
     description: Access to all warps!
@@ -133,5 +141,20 @@ permissions:
     default: false
   easycommands.freeze.cmdblock:
     description: Bypass the cmd block
+    default: false
+  easycommands.maintenance.toggle:
+    description: Turn the maintenance on/off
+    default: false
+  easycommands.maintenance.add:
+    description: Add a player to the maintenance whitelist
+    default: false
+  easycommands.maintenance.remove:
+    description: Remove a player from the maintenance whitelist
+    default: false
+  easycommands.maintenance.kickall:
+    description: Kick all the players that are not on the maintenance whitelist
+    default: false
+  easycommands.maintenance.*:
+    description: Permission to all maintenance commands
     default: false
 

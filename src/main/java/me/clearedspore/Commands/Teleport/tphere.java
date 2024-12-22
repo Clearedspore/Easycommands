@@ -26,7 +26,7 @@ public class tphere implements CommandExecutor {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
 
-                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + " has teleported" + target.getDisplayName() + " to themself");
+                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported " + target.getDisplayName() + " to themself");
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (online.hasPermission("easycommands.logs"))
                         online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to themself]");

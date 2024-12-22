@@ -13,6 +13,7 @@ C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Gamemodes\Sur
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\GodMode.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Heal.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Invsee.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Kick.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Kill.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Nick.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Reload.java
@@ -25,12 +26,15 @@ C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Teleport\Tele
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Commands\Teleport\tphere.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\ConfigFiles\Messages.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\easycommands.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\CheckerListener.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\JoinLeaveListener.java
-C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\PlayerJoinListener.java
-C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\SpawnListener.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Listeners\JoinListener.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\GetLogsCommand.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\LogManager.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Logs\TimeUtils.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\MaintenanceSection\MaintenanceCommand.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\MaintenanceSection\MaintenanceJoinListener.java
+C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\MaintenanceSection\MaintenanceManager.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\Utils\UpdateChecker.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\WarpSection\Delwarp.java
 C:\Coding\Easycommands 1.21\src\main\java\me\clearedspore\WarpSection\DelwarpAll.java
