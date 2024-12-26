@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,6 +20,8 @@ public class Nick implements CommandExecutor {
                 p.setCustomNameVisible(true);
 
                 String Nick = Messages.get().getString("Nick");
+                String Prefix = Messages.get().getString("Prefix");
+                Nick = Nick.replace("%prefix%", Prefix);
                 Nick = Nick.replace("%nickname%", args[0]);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Nick));
 
@@ -38,6 +40,8 @@ public class Nick implements CommandExecutor {
                 p.setCustomNameVisible(false);
 
                 String Unnick = Messages.get().getString("UnNick");
+                String Prefix = Messages.get().getString("Prefix");
+                Unnick = Unnick.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Unnick));
 
                 LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unnicked themself");

@@ -46,6 +46,8 @@ public class CopyInv implements CommandExecutor {
                             }
                             String CopyInv = Messages.get().getString("CopyInv");
                             CopyInv = CopyInv.replace("%target%", target.getDisplayName());
+                            String Prefix = Messages.get().getString("Prefix");
+                            CopyInv = CopyInv.replace("%prefix%", Prefix);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', CopyInv));
 
 

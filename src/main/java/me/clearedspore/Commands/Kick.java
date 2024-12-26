@@ -1,6 +1,6 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
-import me.clearedspore.Logs.LogManager;
-import me.clearedspore.WarpSection.WarpManager;
+import me.clearedspore.Features.Logs.LogManager;
+import me.clearedspore.Features.WarpSection.WarpManager;
 import me.clearedspore.ConfigFiles.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,12 +14,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reload implements TabExecutor {
+public class ECInfo implements TabExecutor {
 
     private final WarpManager warpManager;
     private final JavaPlugin plugin;
 
-    public Reload(WarpManager warpManager, JavaPlugin plugin) {
+    public ECInfo(WarpManager warpManager, JavaPlugin plugin) {
         this.warpManager = warpManager;
         this.plugin = plugin;
     }
@@ -38,6 +38,8 @@ public class Reload implements TabExecutor {
                         warpManager.reloadWarps();
                         plugin.reloadConfig();
                         String Reload = Messages.get().getString("Reload");
+                        String Prefix = Messages.get().getString("Prefix");
+                        Reload = Reload.replace("%prefix%", Prefix);
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Reload));
 
                         LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has reloaded the plugin");

@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Gamemodes;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -18,6 +18,8 @@ public class SurvivalMode implements CommandExecutor {
             if(args.length == 0){
                 p.setGameMode(GameMode.SURVIVAL);
                 String GameMode = Messages.get().getString("Gamemode");
+                String Prefix = Messages.get().getString("Prefix");
+                GameMode = GameMode.replace("%prefix%", Prefix);
                 GameMode = GameMode.replace("%gamemode%", "Survival");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
@@ -40,10 +42,13 @@ public class SurvivalMode implements CommandExecutor {
                         target.setGameMode(GameMode.SURVIVAL);
 
                         String GameModeT = Messages.get().getString("GamemodeTarget");
+                        String Prefix = Messages.get().getString("Prefix");
+                        GameModeT = GameModeT.replace("%prefix%", Prefix);
                         GameModeT = GameModeT.replace("%gamemode%", "Survival");
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', GameModeT));
 
                         String GameMode = Messages.get().getString("GamemodeOther");
+                        GameMode = GameMode.replace("%prefix%", Prefix);
                         GameMode = GameMode.replace("%gamemode%", "Survival");
                         GameMode = GameMode.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));

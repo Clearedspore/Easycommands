@@ -1,4 +1,4 @@
-package me.clearedspore.MaintenanceSection;
+package me.clearedspore.Features.MaintenanceSection;
 
 import me.clearedspore.easycommands;
 

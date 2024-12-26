@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,6 +18,8 @@ public class ClearInventory implements CommandExecutor {
             if (args.length == 0) {
 
                 String ClearInventory = Messages.get().getString("ClearInventory");
+                String Prefix = Messages.get().getString("Prefix");
+                ClearInventory = ClearInventory.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventory));
 
                 p.getInventory().clear();
@@ -36,6 +38,8 @@ public class ClearInventory implements CommandExecutor {
                             target.getInventory().clear();
 
                             String ClearInventoryOther = Messages.get().getString("ClearInventoryOther");
+                            String Prefix = Messages.get().getString("Prefix");
+                            ClearInventoryOther = ClearInventoryOther.replace("%prefix%", Prefix);
                             ClearInventoryOther = ClearInventoryOther.replace("%target%", target.getDisplayName());
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventoryOther));
 

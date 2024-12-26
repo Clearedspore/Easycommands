@@ -1,7 +1,8 @@
 package me.clearedspore.Commands;
 
+import com.google.common.io.FileBackedOutputStream;
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -23,6 +24,8 @@ public class Back implements CommandExecutor {
                     p.teleport(DeathLocation);
 
                     String Back = Messages.get().getString("Back");
+                    String Prefix = Messages.get().getString("Prefix");
+                    Back = Back.replace("%prefix%", Prefix);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Back));
                 }
             } else if (args.length > 0) {
@@ -42,10 +45,13 @@ public class Back implements CommandExecutor {
                             target.teleport(TargetLocation);
 
                             String backOther = Messages.get().getString("BackOther");
+                            String Prefix = Messages.get().getString("Prefix");
+                            backOther = backOther.replace("%prefix%", Prefix);
                             backOther = backOther.replace("%target%", target.getDisplayName());
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', backOther));
 
                             String backT = Messages.get().getString("BackTarget");
+                            backT = backT.replace("%prefix%", Prefix);
                             target.sendMessage(ChatColor.translateAlternateColorCodes('&', backT));
 
                             LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported" + target.getName() + " back to their death location");

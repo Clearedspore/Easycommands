@@ -1,4 +1,4 @@
-package me.clearedspore.Logs;
+package me.clearedspore.Features.Logs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

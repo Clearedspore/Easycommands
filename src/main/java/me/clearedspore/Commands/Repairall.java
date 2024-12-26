@@ -14,6 +14,8 @@ public class Repairall implements CommandExecutor {
         if (sender instanceof Player p) {
 
             String RepairAll = Messages.get().getString("RepairAll");
+            String Prefix = Messages.get().getString("Prefix");
+            RepairAll = RepairAll.replace("%prefix%", Prefix);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', RepairAll));
 
             for (int i = 0; i <= 36; i++) {
@@ -28,8 +30,7 @@ public class Repairall implements CommandExecutor {
 
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

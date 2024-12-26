@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,10 +17,12 @@ public class Heal implements CommandExecutor {
 
             if(args.length == 0){
 
-                p.setHealth(20);
+                p.setHealth(p.getMaxHealth());
                 p.setFoodLevel(20);
 
                 String Heal = Messages.get().getString("Heal");
+                String Prefix = Messages.get().getString("Prefix");
+                Heal = Heal.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Heal));
 
                 LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has healed themself");
@@ -39,10 +41,12 @@ public class Heal implements CommandExecutor {
                 }else{
                     if(p.hasPermission("easycommands.heal.other")) {
 
-                        target.setHealth(20);
+                        target.setHealth(target.getMaxHealth());
                         target.setFoodLevel(20);
 
                         String HealOther = Messages.get().getString("HealOther");
+                        String Prefix = Messages.get().getString("Prefix");
+                        HealOther = HealOther.replace("%prefix%", Prefix);
                         HealOther = HealOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', HealOther));
 

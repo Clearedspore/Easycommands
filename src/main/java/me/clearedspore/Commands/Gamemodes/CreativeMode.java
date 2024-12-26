@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Gamemodes;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -18,6 +18,8 @@ public class CreativeMode implements CommandExecutor {
             if(args.length == 0){
                 p.setGameMode(GameMode.CREATIVE);
                 String GameMode = Messages.get().getString("Gamemode");
+                String Prefix = Messages.get().getString("Prefix");
+                GameMode = GameMode.replace("%prefix%", Prefix);
                 GameMode = GameMode.replace("%gamemode%", "Creative");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
@@ -40,10 +42,13 @@ public class CreativeMode implements CommandExecutor {
                         target.setGameMode(GameMode.CREATIVE);
 
                         String GameModeT = Messages.get().getString("GamemodeTarget");
+                        String Prefix = Messages.get().getString("Prefix");
+                        GameModeT = GameModeT.replace("%prefix%", Prefix);
                         GameModeT = GameModeT.replace("%gamemode%", "Creative");
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', GameModeT));
 
                         String GameMode = Messages.get().getString("GamemodeOther");
+                        GameMode = GameMode.replace("%prefix%", Prefix);
                         GameMode = GameMode.replace("%target%", target.getDisplayName());
                         GameMode = GameMode.replace("%gamemode%", "Creative");
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));

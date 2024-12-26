@@ -1,4 +1,4 @@
-package me.clearedspore.MaintenanceSection;
+package me.clearedspore.Features.MaintenanceSection;
 
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.easycommands;
@@ -40,6 +40,13 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
         String Madd = Messages.get().getString("madd");
         String Mremove = Messages.get().getString("mremove");
         String Mkickall = Messages.get().getString("mkickall");
+
+        String Prefix = Messages.get().getString("Prefix");
+        Mon = Mon.replace("%prefix%", Prefix);
+        Moff = Moff.replace("%prefix%", Prefix);
+        Madd = Madd.replace("%prefix%", Prefix);
+        Mremove = Mremove.replace("%prefix%", Prefix);
+        Mkickall = Mkickall.replace("%prefix%", Prefix);
 
         switch (args[0].toLowerCase()) {
             case "on" -> {

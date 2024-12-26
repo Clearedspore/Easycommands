@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Teleport;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,6 +20,8 @@ public class TeleportAll implements CommandExecutor {
 
                 online.teleport(p.getLocation());
                 String Teleportall = Messages.get().getString("TeleportAll");
+                String Prefix = Messages.get().getString("Prefix");
+                Teleportall = Teleportall.replace("%prefix%", Prefix);
                 Teleportall = Teleportall.replace("%online%", players);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleportall));
             }

@@ -1,4 +1,4 @@
-package me.clearedspore.WarpSection;
+package me.clearedspore.Features.WarpSection;
 
 import me.clearedspore.easycommands;
 import org.bukkit.Location;

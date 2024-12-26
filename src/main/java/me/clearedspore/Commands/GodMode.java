@@ -16,6 +16,8 @@ public class GodMode implements CommandExecutor {
                     p.setInvulnerable(false);
 
                     String GodEnable = Messages.get().getString("GodDisabled");
+                    String Prefix = Messages.get().getString("Prefix");
+                    GodEnable = GodEnable.replace("%prefix%", Prefix);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', GodEnable));
 
                     for (Player online : Bukkit.getOnlinePlayers()){
@@ -27,6 +29,8 @@ public class GodMode implements CommandExecutor {
                     p.setInvulnerable(true);
 
                     String GodDisable = Messages.get().getString("GodEnable");
+                    String Prefix = Messages.get().getString("Prefix");
+                    GodDisable = GodDisable.replace("%prefix%", Prefix);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', GodDisable));
 
                     for (Player online : Bukkit.getOnlinePlayers()){

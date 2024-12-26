@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,6 +29,8 @@ public class Enderchest implements CommandExecutor {
                    p.openInventory(target.getEnderChest());
 
                     String EnderChestOther = Messages.get().getString("EnderChestOther");
+                    String Prefix = Messages.get().getString("Prefix");
+                    EnderChestOther = EnderChestOther.replace("%prefix%", Prefix);
                     EnderChestOther = EnderChestOther.replace("%target%", target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', EnderChestOther));
 

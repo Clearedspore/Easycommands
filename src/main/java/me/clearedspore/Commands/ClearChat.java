@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,6 +18,8 @@ public class ClearChat implements CommandExecutor {
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (online.hasPermission("easycommands.clearchat.bypass")) {
                     String ClearChat = Messages.get().getString("ClearChat");
+                    String Prefix = Messages.get().getString("Prefix");
+                    ClearChat = ClearChat.replace("%prefix%", Prefix);
                     ClearChat = ClearChat.replace("%player%", p.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
                 } else if (!online.hasPermission(("easycommands.clearchat.bypass"))) {
@@ -25,6 +27,8 @@ public class ClearChat implements CommandExecutor {
                     clearPlayerChat(online);
 
                     String ClearChat = Messages.get().getString("ClearChat");
+                    String Prefix = Messages.get().getString("Prefix");
+                    ClearChat = ClearChat.replace("%prefix%", Prefix);
                     ClearChat = ClearChat.replace("%player%", p.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearChat));
                 }

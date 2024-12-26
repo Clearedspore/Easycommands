@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Teleport;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,6 +22,8 @@ public class Teleport implements CommandExecutor {
                 p.teleport(target.getLocation());
 
                 String Teleport = Messages.get().getString("Teleport");
+                String Prefix = Messages.get().getString("Prefix");
+                Teleport = Teleport.replace("%prefix%", Prefix);
                 Teleport = Teleport.replace("%target%", target.getDisplayName());
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
@@ -39,6 +41,8 @@ public class Teleport implements CommandExecutor {
                         playertosend.teleport(target.getLocation());
 
                         String Teleport = Messages.get().getString("TeleportOthers");
+                        String Prefix = Messages.get().getString("Prefix");
+                        Teleport = Teleport.replace("%prefix%", Prefix);
                         Teleport = Teleport.replace("%playertosend%", playertosend.getDisplayName());
                         Teleport = Teleport.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));

@@ -38,6 +38,8 @@ public class JoinListener implements Listener {
             if (location != null) {
                 p.teleport(location);
                 String Spawn = Messages.get().getString("Spawn");
+                String Prefix = Messages.get().getString("Prefix");
+                Spawn = Spawn.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
             }
         }

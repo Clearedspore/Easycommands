@@ -88,11 +88,13 @@ public class FreezeListener implements Listener {
         Player p = e.getPlayer();
 
         if(Frozen.contains(p)){
-            if(p.hasPermission("easycommands.freeze.cmdbypass")){
+            if(p.hasPermission("easycommands.freeze.cmdblock")){
                 return;
             } else {
             e.setCancelled(true);
             String FrozenCMDBlock = Messages.get().getString("FrozencmdBlock");
+            String Prefix = Messages.get().getString("Prefix");
+            FrozenCMDBlock = FrozenCMDBlock.replace("%prefix%", Prefix);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenCMDBlock));
             }
         }

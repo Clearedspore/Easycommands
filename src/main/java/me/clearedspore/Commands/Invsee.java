@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -21,6 +21,8 @@ public class Invsee implements CommandExecutor {
             p.openInventory(target.getInventory());
 
             String invSee = Messages.get().getString("Invsee");
+            String Prefix = Messages.get().getString("Prefix");
+            invSee = invSee.replace("%prefix%", Prefix);
             invSee = invSee.replace("%target%", target.getDisplayName());
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', invSee));
 

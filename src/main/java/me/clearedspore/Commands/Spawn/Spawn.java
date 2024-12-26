@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Spawn;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,6 +32,8 @@ public class Spawn implements CommandExecutor {
                     p.teleport(location);
 
                     String Spawn = Messages.get().getString("Spawn");
+                    String Prefix = Messages.get().getString("Prefix");
+                    Spawn = Spawn.replace("%prefix%", Prefix);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
 
                 } else if (args.length == 1) {
@@ -46,9 +48,12 @@ public class Spawn implements CommandExecutor {
 
                         target.teleport(location);
                         String Spawn = Messages.get().getString("Spawn");
+                        String Prefix = Messages.get().getString("Prefix");
+                        Spawn = Spawn.replace("%prefix%", Prefix);
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', Spawn));
 
                         String SpawnT = Messages.get().getString("SpawnTarget");
+                        SpawnT = SpawnT.replace("%prefix%", Prefix);
                         SpawnT = SpawnT.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', SpawnT));
 

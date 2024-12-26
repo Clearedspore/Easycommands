@@ -1,7 +1,7 @@
 package me.clearedspore.Commands.Freeze;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,6 +31,8 @@ public class Freeze implements CommandExecutor {
 
                     LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unfreezed " + target.getDisplayName());
                     String UnFreeze = Messages.get().getString("UnFreeze");
+                    String Prefix = Messages.get().getString("Prefix");
+                    UnFreeze = UnFreeze.replace("%prefix%", Prefix);
                     UnFreeze = UnFreeze.replace("%target%", target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', UnFreeze));
                     for (Player online : Bukkit.getOnlinePlayers()){
@@ -44,11 +46,14 @@ public class Freeze implements CommandExecutor {
                     Frozen.add(target);
                     String Freeze = Messages.get().getString("Freeze");
                     Freeze = Freeze.replace("%target%", target.getDisplayName());
+                    String Prefix = Messages.get().getString("Prefix");
+                    Freeze = Freeze.replace("%prefix%", Prefix);
 
 
                     LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has freezed " + target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Freeze));
                     String FrozenNotify = Messages.get().getString("FrozenNotify");
+                    FrozenNotify = FrozenNotify.replace("%prefix%", Prefix);
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));

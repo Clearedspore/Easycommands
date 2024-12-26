@@ -1,7 +1,7 @@
-package me.clearedspore.WarpSection;
+package me.clearedspore.Features.WarpSection;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,6 +40,8 @@ public class SetWarp implements CommandExecutor {
 
             warpManager.setWarp(warpName, p.getLocation());
             String setwarp = Messages.get().getString("setwarp");
+            String Prefix = Messages.get().getString("Prefix");
+            setwarp = setwarp.replace("%prefix%", Prefix);
             setwarp = setwarp.replace("%warpname%", warpName);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', setwarp));
         }

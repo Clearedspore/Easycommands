@@ -1,4 +1,4 @@
-package me.clearedspore.Logs;
+package me.clearedspore.Features.Logs;
 
 import java.time.Instant;
 import java.util.*;

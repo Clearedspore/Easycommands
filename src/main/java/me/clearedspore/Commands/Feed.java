@@ -18,6 +18,8 @@ public class Feed implements CommandExecutor {
                 p.setFoodLevel(20);
 
                 String Feed = Messages.get().getString("Feed");
+                String Prefix = Messages.get().getString("Prefix");
+                Feed = Feed.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Feed));
 
             }else{
@@ -34,6 +36,8 @@ public class Feed implements CommandExecutor {
                         target.setFoodLevel(20);
 
                         String FeedOther = Messages.get().getString("FeedOther");
+                        String Prefix = Messages.get().getString("Prefix");
+                        FeedOther = FeedOther.replace("%prefix%", Prefix);
                         FeedOther = FeedOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', FeedOther));
 

@@ -1,4 +1,4 @@
-package me.clearedspore.WarpSection;
+package me.clearedspore.Features.WarpSection;
 
 import me.clearedspore.ConfigFiles.Messages;
 import org.bukkit.Bukkit;
@@ -48,6 +48,8 @@ public class WarpCommand implements CommandExecutor, Listener {
             if(location != null) {
                 p.teleport(warpManager.getWarp(warpName));
                 String warp = Messages.get().getString("warp");
+                String Prefix = Messages.get().getString("Prefix");
+                warp = warp.replace("%prefix%", Prefix);
                 warp = warp.replace("%warpname%", warpName);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', warp));
                 return true;
@@ -175,6 +177,8 @@ public class WarpCommand implements CommandExecutor, Listener {
                 if (warpLocation != null) {
                     p.teleport(warpLocation);
                     String warp = Messages.get().getString("warp");
+                    String Prefix = Messages.get().getString("Prefix");
+                    warp = warp.replace("%prefix%", Prefix);
                     warp = warp.replace("%warpname%", warpName);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', warp));
                 } else {

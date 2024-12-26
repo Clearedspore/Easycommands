@@ -1,7 +1,7 @@
 package me.clearedspore.Commands;
 
 import me.clearedspore.ConfigFiles.Messages;
-import me.clearedspore.Logs.LogManager;
+import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,6 +18,8 @@ public class Kill implements CommandExecutor {
                 p.setHealth(0);
 
                 String Kill = Messages.get().getString("Kill");
+                String Prefix = Messages.get().getString("Prefix");
+                Kill = Kill.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Kill));
 
             }else{
@@ -34,6 +36,8 @@ public class Kill implements CommandExecutor {
                         target.setHealth(0);
 
                         String KillOther = Messages.get().getString("KillOther");
+                        String Prefix = Messages.get().getString("Prefix");
+                        KillOther = KillOther.replace("%prefix%", Prefix);
                         KillOther = KillOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', KillOther));
 

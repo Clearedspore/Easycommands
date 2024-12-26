@@ -1,6 +1,6 @@
 name: Easycommands
 "id": 121185,
-version: 1.6
+version: 1.7
 main: me.clearedspore.easycommands
 api-version: '1.21'
 commands:
@@ -126,35 +126,98 @@ commands:
     description: Maintenance function!
     permission: easycommands.maintenance
     usage: /maintenance <arguments>
+  chatcolor:
+    description: Chatcolor GUI!
+    permission: easycommands.chatcolor
+  item:
+    description: Edit the item in your hand!
+    permission: easycommands.item
+  msg:
+    description: Send a private message to someone!
+    permission: easycommands.msg
+    aliases:
+      - whisper
+      - message
+      - pm
+      - privatemsg
+      - privatemessage
+  itemsaver:
+    description: Save a item or get it back!
+    permission: easycommands.itemsaver
+    aliases:
+      - saveritem
+      - items
+  pickup:
+    description: Settings for pickups
+    permission: easycommands.pickup
 permissions:
   easycommands.warp.warp.*:
     description: Access to all warps!
-    default: false
+    default: op
   easycommands.update:
     description: get a notification when there is a new update!
-    default: false
+    default: op
   easycommands.logs.admin:
     description: Logs for admins
-    default: false
+    default: op
   easycommands.staff:
     description: General permissions for staff
-    default: false
+    default: op
   easycommands.freeze.cmdblock:
     description: Bypass the cmd block
-    default: false
+    default: op
   easycommands.maintenance.toggle:
     description: Turn the maintenance on/off
-    default: false
+    default: op
   easycommands.maintenance.add:
     description: Add a player to the maintenance whitelist
-    default: false
+    default: op
   easycommands.maintenance.remove:
     description: Remove a player from the maintenance whitelist
-    default: false
+    default: op
   easycommands.maintenance.kickall:
     description: Kick all the players that are not on the maintenance whitelist
-    default: false
+    default: op
   easycommands.maintenance.*:
     description: Permission to all maintenance commands
-    default: false
+    default: op
+  easycommands.chatcolor.red:
+    description: Allows the player to use red chat color.
+    default: op
+  easycommands.chatcolor.green:
+    description: Allows the player to use green chat color.
+    default: op
+  easycommands.chatcolor.blue:
+    description: Allows the player to use blue chat color.
+    default: op
+  easycommands.chatcolor.yellow:
+    description: Allows the player to use yellow chat color.
+    default: op
+  easycommands.chatcolor.aqua:
+    description: Allows the player to use aqua chat color.
+    default: op
+  easycommands.chatcolor.gold:
+    description: Allows the player to use gold chat color.
+    default: op
+  easycommands.chatcolor.light_purple:
+    description: Allows the player to use light purple chat color.
+    default: op
+  easycommands.chatcolor.dark_gray:
+    description: Allows the player to use dark gray chat color.
+    default: op
+  easycommands.chatcolor.white:
+    description: Allows the player to use white chat color.
+    default: op
+  easycommands.pickup.autopickup:
+    description: permissions for autopickup.
+    default: op
+  easycommands.pickup.autosmelt:
+    description: permissions for autosmelt.
+    default: op
+  easycommands.pickup.other:
+    description: toggle other playes their pickups
+    default: op
+  easycommands.pickup.*:
+    description: permissions for all pickup settings
+    default: op
 
