@@ -1,9 +1,8 @@
-package me.clearedspore.Commands.Items;
+package me.clearedspore.Commands;
 
 import me.clearedspore.easycommands;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
@@ -15,20 +14,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Item implements CommandExecutor, TabCompleter {
-    private final easycommands easycommands;
     private final Map<String, Enchantment> vanillaEnchantmentMap = createEnchantmentMap();
     private final Map<String, Attribute> vanillaAttributeMap = createAttributeMap();
 
-    public Item(me.clearedspore.easycommands easycommands) {
-        this.easycommands = easycommands;
-    }
 
     private Map<String, Enchantment> createEnchantmentMap() {
         Map<String, Enchantment> map = new HashMap<>();
@@ -62,9 +55,9 @@ public class Item implements CommandExecutor, TabCompleter {
         map.put("riptide", Enchantment.RIPTIDE);
         map.put("impaling", Enchantment.IMPALING);
         map.put("multishot", Enchantment.MULTISHOT);
-        // Add any other enchantments supported by your server version
         return map;
     }
+
 
     private Map<String, Attribute> createAttributeMap() {
         Map<String, Attribute> map = new HashMap<>();
@@ -347,10 +340,9 @@ public class Item implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
             return new ArrayList<>();
+
         }
-
         Player player = (Player) sender;
-
         if (args.length == 1) {
             return Arrays.asList("rename", "addlore", "removelore", "glow", "enchant", "enchantremove", "addattribute", "removeattribute", "proprety", "unbreakable", "durability").stream()
                     .filter(arg -> player.hasPermission("easycommands.item." + arg) || player.hasPermission("easycommands.item.*"))
@@ -397,6 +389,7 @@ public class Item implements CommandExecutor, TabCompleter {
                     .filter(name -> name.startsWith(args[1].toLowerCase()))
                     .collect(Collectors.toList());
         }
+
         if (args[0].equalsIgnoreCase("proprety") && args.length == 2) {
             return Arrays.asList("attribute", "enchantments", "unbreakable", "durability")
                     .stream()

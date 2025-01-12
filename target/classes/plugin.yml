@@ -1,6 +1,6 @@
 name: Easycommands
 "id": 121185,
-version: 1.7
+version: 1.8
 main: me.clearedspore.easycommands
 api-version: '1.21'
 commands:
@@ -23,6 +23,11 @@ commands:
   gms:
     description: Change your gamemode to Survival!
     permission: easycommands.gamemode.survival
+  gamemode:
+    description: Change your gamemode!
+    permission: easycommands.gamemode
+    aliases:
+      - gm
   feed:
     description: Feed yourself!
     permission: easycommands.feed
@@ -73,6 +78,15 @@ commands:
   tphere:
     description: Teleport players to you!
     permission: easycommands.teleport.here
+  tpa:
+    description: request a teleport
+    permission: easycommands.teleport.tpa
+  tpahere:
+    description: request a teleport here
+    permission: easycommands.teleport.tpahere
+  tpaccept:
+    description: Accept a teleport request
+    permission: easycommands.teleport.accept
   clearchat:
     description: Clear the chat!
     permission: easycommands.clearchat
@@ -141,15 +155,71 @@ commands:
       - pm
       - privatemsg
       - privatemessage
-  itemsaver:
-    description: Save a item or get it back!
-    permission: easycommands.itemsaver
-    aliases:
-      - saveritem
-      - items
   pickup:
     description: Settings for pickups
     permission: easycommands.pickup
+  sudo:
+    description: Let a player run a command as another player!
+    permission: easycommands.sudo
+  settings:
+    description: Open the settings gui!
+    permission: easycommands.settings
+    aliases:
+      - options
+      - preferences
+  flight:
+    description: Toggle your flight
+    permission: easycommands.flight
+    aliases:
+      - fly
+      - togglefly
+  workbench:
+    description: Open the workbench gui
+    permission: easycommands.workbench
+    aliases:
+      - craft
+      - craftingtable
+  anvil:
+    description: open the anvil gui
+    permission: easycommands.anvil
+  loom:
+    description: open the loom gui
+    permission: easycommands.loom
+  cartography:
+    description: open the cartography gui
+    permission: easycommands.cartography
+  furnace:
+    description: open the furnace gui
+    permission: easycommands.furnace
+  smithingtable:
+    description: open the smithingtable gui
+    permission: easycommands.smithingtable
+  report:
+    description: report a player!
+    permission: easycommands.report.report
+  reports:
+    description: get the reports
+    permission: easycommands.reports.getreports
+    aliases:
+      - getreports
+      - viewreports
+      - openreportsgui
+  staffhelp:
+    description: Request help!
+    permission: easycommands.staffhelp
+    aliases:
+      - shelp
+      - helpstaff
+      - requesthelp
+  dynamiccommand:
+    description: Placeholder for dynamically registered commands
+  broadcast:
+    description: Broadcast a message to all online players!
+    permission: easycommands.broadcast
+    aliases:
+      - bc
+      - bcast
+      - broadcastmessage
 permissions:
   easycommands.warp.warp.*:
     description: Access to all warps!
@@ -199,6 +269,15 @@ permissions:
   easycommands.chatcolor.gold:
     description: Allows the player to use gold chat color.
     default: op
+  easycommands.chatcolor.italic:
+    description: Allows the player to use italic chat option.
+    default: op
+  easycommands.chatcolor.bold:
+    description: Allows the player to use bold chat option.
+    default: op
+  easycommands.chatcolor.underline:
+    description: Allows the player to use underline chat option.
+    default: op
   easycommands.chatcolor.light_purple:
     description: Allows the player to use light purple chat color.
     default: op
@@ -220,4 +299,41 @@ permissions:
   easycommands.pickup.*:
     description: permissions for all pickup settings
     default: op
-
+  easycommands.flight.others:
+    description: toggle other people their flight
+    default: op
+  easycommands.gamemode.creative:
+    description: creative gamemode
+    default: op
+  easycommands.gamemode.spectator:
+    description: Spectator gamemode
+  easycommands.gamemode.survival:
+    description: Surival gamemode
+    default: op
+  easycommands.gamemode.adventure:
+    description: Adventure gamemode
+    default: op
+  easycommands.reports.manage:
+    description: Manage reports
+    default: op
+  easycommands.reports.getreports:
+    description: View reports
+    default: op
+  easycommands.reports.reportnotify:
+    description: information about reporting
+    default: op
+  easycommands.reports.bypasscooldown:
+    description: Bypass the report cooldown
+    default: op
+  easycommands.staffhelp.bypasscooldown:
+    description: bypass the help cooldown
+    default: op
+  easycommands.kill.players:
+    description: kill players
+    default: op
+  easycommands.kill.all:
+    description: kill everyone
+    default: op
+  easycommands.kill.mobs:
+    description: kill mobs
+    default: op

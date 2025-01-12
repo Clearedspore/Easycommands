@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Teleport;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class TeleportAll implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public TeleportAll(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
@@ -26,10 +33,12 @@ public class TeleportAll implements CommandExecutor {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleportall));
             }
 
-            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported all players to themself");
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                if (online.hasPermission("easycommands.logs"))
-                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported all players to themself]");
+            LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported all players to themself");
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    if(settingsManager.isLogEnabled(online)) {
+                    if (online.hasPermission("easycommands.logs"))
+                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported all players to themself]");
+                }
             }
         }
         return true;

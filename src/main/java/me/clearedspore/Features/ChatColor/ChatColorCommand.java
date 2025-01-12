@@ -74,16 +74,21 @@ public class ChatColorCommand implements CommandExecutor{
             gui.setItem(i, item);
         }
 
-        // Add formatting options
-        ItemStack boldItem = createFormattingItem(Material.ANVIL, ChatColor.BOLD + "Bold");
-        ItemStack italicItem = createFormattingItem(Material.FEATHER, ChatColor.ITALIC + "Italic");
-        ItemStack underlineItem = createFormattingItem(Material.STRING, ChatColor.UNDERLINE + "Underline");
         ItemStack resetItem = createFormattingItem(Material.BARRIER, ChatColor.RED + "Reset");
         ItemStack Done = createFormattingItem(Material.GREEN_WOOL, ChatColor.GREEN + "Confirm");
 
-        gui.setItem(18, boldItem);
-        gui.setItem(19, italicItem);
-        gui.setItem(20, underlineItem);
+        if (player.hasPermission("easycommands.chatcolor.bold")) {
+            ItemStack boldItem = createFormattingItem(Material.ANVIL, ChatColor.BOLD + "Bold");
+            gui.setItem(18, boldItem);
+        }
+        if (player.hasPermission("easycommands.chatcolor.italic")) {
+            ItemStack italicItem = createFormattingItem(Material.FEATHER, ChatColor.ITALIC + "Italic");
+            gui.setItem(19, italicItem);
+        }
+        if (player.hasPermission("easycommands.chatcolor.underline")) {
+            ItemStack underlineItem = createFormattingItem(Material.STRING, ChatColor.UNDERLINE + "Underline");
+            gui.setItem(20, underlineItem);
+        }
         gui.setItem(26, resetItem);
         gui.setItem(25, Done);
 

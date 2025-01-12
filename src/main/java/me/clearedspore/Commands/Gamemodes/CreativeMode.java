@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Gamemodes;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -11,6 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CreativeMode implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public CreativeMode(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
@@ -23,10 +29,12 @@ public class CreativeMode implements CommandExecutor {
                 GameMode = GameMode.replace("%gamemode%", "Creative");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
-                LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has changed their gamemode to Creative");
-                for (Player online : Bukkit.getOnlinePlayers()) {
-                    if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Creative]");
+                LogManager.getInstance().log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has changed their gamemode to Creative");
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        if(settingsManager.isLogEnabled(online)) {
+                        if (online.hasPermission("easycommands.logs"))
+                            online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Creative]");
+                    }
                 }
                 }else{
 
@@ -53,10 +61,12 @@ public class CreativeMode implements CommandExecutor {
                         GameMode = GameMode.replace("%gamemode%", "Creative");
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
-                        LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Changed " + target.getDisplayName() + "'s gamemode to Creative");
-                        for(Player online : Bukkit.getOnlinePlayers()){
-                            if(online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Creative]");
+                        LogManager.getInstance().log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Changed " + target.getDisplayName() + "'s gamemode to Creative");
+                            for (Player online : Bukkit.getOnlinePlayers()) {
+                                if(settingsManager.isLogEnabled(online)) {
+                                if (online.hasPermission("easycommands.logs"))
+                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + "has changed the gamemode for " + target.getDisplayName() + " to Creative]");
+                            }
                         }
                     }else{
                         if (!p.hasPermission(("easycommands.gamemode.other"))){

@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Gamemodes;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -11,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SurvivalMode implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public SurvivalMode(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
@@ -23,10 +31,12 @@ public class SurvivalMode implements CommandExecutor {
                 GameMode = GameMode.replace("%gamemode%", "Survival");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
-                LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has changed their gamemode to Survival");
-                for (Player online : Bukkit.getOnlinePlayers()) {
-                    if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Survival]");
+                LogManager.getInstance().log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has changed their gamemode to Survival");
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        if(settingsManager.isLogEnabled(online)) {
+                        if (online.hasPermission("easycommands.logs"))
+                            online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Survival]");
+                    }
                 }
             }else{
 
@@ -53,10 +63,12 @@ public class SurvivalMode implements CommandExecutor {
                         GameMode = GameMode.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', GameMode));
 
-                        LogManager.log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Changed " + target.getDisplayName() + "'s gamemode to Survival");
-                        for (Player online : Bukkit.getOnlinePlayers()) {
-                            if (online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Survival]");
+                        LogManager.getInstance().log(p.getUniqueId(),ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Changed " + target.getDisplayName() + "'s gamemode to Survival");
+                            for (Player online : Bukkit.getOnlinePlayers()) {
+                                if(settingsManager.isLogEnabled(online)) {
+                                if (online.hasPermission("easycommands.logs"))
+                                    online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has changed their gamemode to Survival]");
+                            }
                         }
                     }else{
                         if (!p.hasPermission(("easycommands.gamemode.other"))){

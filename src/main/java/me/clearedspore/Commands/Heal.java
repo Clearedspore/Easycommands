@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Heal implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public Heal(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -25,10 +32,13 @@ public class Heal implements CommandExecutor {
                 Heal = Heal.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Heal));
 
-                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has healed themself");
-                for (Player online : Bukkit.getOnlinePlayers()){
-                    if(online.hasPermission("easycommands.logs"))
+                LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has healed themself");
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    if(settingsManager.isLogEnabled(online)) {
+                    if (online.hasPermission("easycommands.logs")) {
                         online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed themself]");
+                    }
+                }
                 }
             }else{
 
@@ -50,10 +60,12 @@ public class Heal implements CommandExecutor {
                         HealOther = HealOther.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', HealOther));
 
-                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has healed" + target.getDisplayName());
+                        LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has healed" + target.getDisplayName());
                         for (Player online : Bukkit.getOnlinePlayers()) {
-                            if (online.hasPermission("easycommands.logs")) {
-                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed " + target.getDisplayName() + "]");
+                                if (online.hasPermission("easycommands.logs")) {
+                                    if(settingsManager.isLogEnabled(online)) {
+                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has healed " + target.getDisplayName() + "]");
+                                }
                             }
                         }
                         }else{

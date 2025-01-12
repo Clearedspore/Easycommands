@@ -28,7 +28,7 @@ public class GetLogsCommand implements CommandExecutor, TabCompleter {
         }
 
         UUID targetUUID = target.getUniqueId();
-        List<LogManager.LogEntry> logs = LogManager.getLogs(targetUUID);
+        List<LogManager.LogEntry> logs = LogManager.getInstance().getLogs(targetUUID);
 
         if (logs.isEmpty()) {
             sender.sendMessage("No logs found for " + target.getName());
@@ -83,7 +83,7 @@ public class GetLogsCommand implements CommandExecutor, TabCompleter {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
                 UUID targetUUID = target.getUniqueId();
-                List<LogManager.LogEntry> logs = LogManager.getLogs(targetUUID);
+                List<LogManager.LogEntry> logs = LogManager.getInstance().getLogs(targetUUID);
 
                 if (!logs.isEmpty()) {
                     int totalPages = (int) Math.ceil((double) logs.size() / LOGS_PER_PAGE);

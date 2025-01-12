@@ -23,7 +23,7 @@ public class PickupCommand implements CommandExecutor, TabCompleter {
         if (args.length == 0) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
-                PickupManager.getGui().OpenPickupGUI(p);
+                PickupManager.getGui().OpenGUI(p);
                 return true;
             } else {
                 sender.sendMessage("Only players can open the pickup GUI.");

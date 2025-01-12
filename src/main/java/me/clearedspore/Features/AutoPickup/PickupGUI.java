@@ -1,5 +1,6 @@
 package me.clearedspore.Features.AutoPickup;
 
+import me.clearedspore.Utils.PaginatedMenuHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,13 +21,12 @@ public class PickupGUI implements Listener {
     public PickupGUI(PickupManager autoPickupManager) {
         this.PickupManager = autoPickupManager;
     }
-
-
-    public void OpenPickupGUI(Player p) {
-        Inventory GUI = Bukkit.createInventory(null, 18, ChatColor.GREEN + "AutoPickups");
+    public void OpenGUI(Player p) {
+        Inventory GUI = Bukkit.createInventory(null, 36, ChatColor.GREEN + "AutoPickups");
 
         ItemStack AutoPickup = new ItemStack(Material.DROPPER);
         ItemMeta AutoPickupMeta = AutoPickup.getItemMeta();
+
 
         if (PickupManager.isAutoPickupEnabled(p)) {
             AutoPickupMeta.setDisplayName(ChatColor.GREEN + "Autopickup");
@@ -84,6 +84,7 @@ public class PickupGUI implements Listener {
 
         p.openInventory(GUI);
     }
+
     public void updateItems(Player p) {
         if (p.getOpenInventory() != null && p.getOpenInventory().getTitle().equals(ChatColor.GREEN + "AutoPickups")) {
             Inventory GUI = p.getOpenInventory().getTopInventory();
@@ -141,7 +142,7 @@ public class PickupGUI implements Listener {
     }
 
     @EventHandler
-    public void OnClick(InventoryClickEvent e) {
+    public void handleMenuClick(InventoryClickEvent e) {
         if (e.getView().getTitle().equals(ChatColor.GREEN + "AutoPickups")) {
             e.setCancelled(true);
             if (!e.getClick().isLeftClick()) return;

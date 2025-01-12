@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -11,6 +12,12 @@ import org.bukkit.entity.Player;
 
 
 public class ClearInventory implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public ClearInventory(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
@@ -43,10 +50,12 @@ public class ClearInventory implements CommandExecutor {
                             ClearInventoryOther = ClearInventoryOther.replace("%target%", target.getDisplayName());
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', ClearInventoryOther));
 
-                            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has cleared the inventory of " + target.getDisplayName());
-                            for (Player online : Bukkit.getOnlinePlayers()) {
-                                if (online.hasPermission("easycommands.logs"))
-                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory of " + target.getDisplayName() + "]");
+                            LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has cleared the inventory of " + target.getDisplayName());
+                                for (Player online : Bukkit.getOnlinePlayers()) {
+                                    if(settingsManager.isLogEnabled(online)) {
+                                    if (online.hasPermission("easycommands.logs"))
+                                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has cleared the inventory of " + target.getDisplayName() + "]");
+                                }
                             }
                         } else {
 

@@ -1,5 +1,6 @@
 package me.clearedspore.Features.WarpSection;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,9 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Delwarp implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
     private final WarpManager warpManager;
 
-    public Delwarp(WarpManager warpManager) {
+    public Delwarp(SettingsManager settingsManager, WarpManager warpManager) {
+        this.settingsManager = settingsManager;
         this.warpManager = warpManager;
     }
 
@@ -28,10 +32,12 @@ public class Delwarp implements CommandExecutor {
         }
 
         String warpName = args[0];
-        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has deleted the " + warpName + " warp");
+        LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has deleted the " + warpName + " warp");
         for (Player online : Bukkit.getOnlinePlayers()) {
             if (online.hasPermission("easycommands.logs")) {
-                online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has deleted the " + warpName + " warp]");
+                if (settingsManager.isLogEnabled(online)) {
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has deleted the " + warpName + " warp]");
+                }
             }
             warpManager.removeWarp(warpName);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9Removed &f" + warpName + " &9warp"));

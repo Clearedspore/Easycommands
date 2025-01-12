@@ -1,5 +1,6 @@
 package me.clearedspore.Features.WarpSection;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,10 +11,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SetWarp implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
 
     private final WarpManager warpManager;
 
-    public SetWarp(WarpManager warpManager) {
+    public SetWarp(SettingsManager settingsManager, WarpManager warpManager) {
+        this.settingsManager = settingsManager;
         this.warpManager = warpManager;
     }
 
@@ -32,10 +36,12 @@ public class SetWarp implements CommandExecutor {
         }
 
         String warpName = args[0];
-        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has created the " + warpName + " warp");
+        LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has created the " + warpName + " warp");
         for (Player online : Bukkit.getOnlinePlayers()) {
             if (online.hasPermission("easycommands.logs")) {
-                online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has created the " + warpName + " warp]");
+                if (settingsManager.isLogEnabled(online)) {
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getName() + " has created the " + warpName + " warp]");
+                }
             }
 
             warpManager.setWarp(warpName, p.getLocation());

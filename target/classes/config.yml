@@ -41,3 +41,42 @@ whitelist: #Players that can join while maintenance is enabled
   - player1
   - player2
 
+broadcastprefix: "&f[&9Broadcast&f] &f" #Prefix for the broadcast messages!
+
+#Log deletion function
+#Here you can delete logs after a certain amount of days!
+logdelete: "7 days" #Delete logs older than this number of days you can also use hours, minutes and seconds!
+
+reportcooldown: 5 minutes # you can use: seconds, minutes, hours, and days
+reportreasons: # Report reasons here!
+  - Spamming
+  - Advertising
+  - Cheating
+  - Discrimination
+  - Death-Wishes
+  - Dox-Threatening
+  - Harassment
+  - Impersonation
+  - Inappropriate-Content
+  - Insulting
+  - NSFW-Material
+  - Staff-disrespect
+  - inappropriate-behavior
+  - inappropriate-items/teamnames
+  - inappropriate-skin
+
+channels:
+  staffchat:
+    command:
+      - /staffchat
+      - /sc
+    prefix: "&f[&9StaffChat&f]:"
+    permission: easycommands.chat.staff
+  adminchat:
+    command:
+      - /adminchat
+      - /adc
+    prefix: "&f[&cAdminChat&f]:"
+    permission: easycommands.chat.admin
+
+

@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Freeze;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -12,6 +13,12 @@ import org.bukkit.entity.Player;
 import static me.clearedspore.easycommands.Frozen;
 
 public class Freeze implements CommandExecutor {
+
+    private final SettingsManager settingsManager;
+
+    public Freeze(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -29,16 +36,17 @@ public class Freeze implements CommandExecutor {
                     target.setGlowing(false);
                     Frozen.remove(target);
 
-                    LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unfreezed " + target.getDisplayName());
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unfreezed " + target.getDisplayName());
                     String UnFreeze = Messages.get().getString("UnFreeze");
                     String Prefix = Messages.get().getString("Prefix");
                     UnFreeze = UnFreeze.replace("%prefix%", Prefix);
                     UnFreeze = UnFreeze.replace("%target%", target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', UnFreeze));
                     for (Player online : Bukkit.getOnlinePlayers()){
-
-                        if(online.hasPermission("easycommands.logs")){
-                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has unfreezed " + target.getDisplayName() + "]");
+                        if(settingsManager.isLogEnabled(p)) {
+                            if (online.hasPermission("easycommands.logs")) {
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has unfreezed " + target.getDisplayName() + "]");
+                            }
                         }
                     }
 
@@ -50,7 +58,7 @@ public class Freeze implements CommandExecutor {
                     Freeze = Freeze.replace("%prefix%", Prefix);
 
 
-                    LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has freezed " + target.getDisplayName());
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has freezed " + target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Freeze));
                     String FrozenNotify = Messages.get().getString("FrozenNotify");
                     FrozenNotify = FrozenNotify.replace("%prefix%", Prefix);
@@ -61,9 +69,10 @@ public class Freeze implements CommandExecutor {
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', FrozenNotify));
 
                     for (Player online : Bukkit.getOnlinePlayers()){
-
-                        if(online.hasPermission("easycommands.logs")){
-                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has freezed " + target.getDisplayName() + "]");
+                        if(settingsManager.isLogEnabled(online)) {
+                            if (online.hasPermission("easycommands.logs")) {
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has freezed " + target.getDisplayName() + "]");
+                            }
                         }
                     }
                 }

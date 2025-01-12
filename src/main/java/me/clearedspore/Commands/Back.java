@@ -1,6 +1,7 @@
 package me.clearedspore.Commands;
 
 import com.google.common.io.FileBackedOutputStream;
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -12,6 +13,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Back implements CommandExecutor {
+
+    private final SettingsManager settingsManager;
+
+    public Back(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
@@ -54,11 +62,12 @@ public class Back implements CommandExecutor {
                             backT = backT.replace("%prefix%", Prefix);
                             target.sendMessage(ChatColor.translateAlternateColorCodes('&', backT));
 
-                            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported" + target.getName() + " back to their death location");
+                            LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported" + target.getName() + " back to their death location");
                             for (Player online : Bukkit.getOnlinePlayers()) {
-
-                                if (online.hasPermission("easycommands.logs"))
-                                    online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has teleported " + ChatColor.GRAY + target.getDisplayName() + ChatColor.GRAY + " to their last death location]");
+                                if (settingsManager.isLogEnabled(online)) {
+                                    if (online.hasPermission("easycommands.logs"))
+                                        online.sendMessage(ChatColor.GRAY + "[" + ChatColor.GRAY + p.getDisplayName() + ChatColor.GRAY + " has teleported " + ChatColor.GRAY + target.getDisplayName() + ChatColor.GRAY + " to their last death location]");
+                                }
                             }
                         }
                     } else{

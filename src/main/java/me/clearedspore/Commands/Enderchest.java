@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Enderchest implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public Enderchest(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
@@ -34,10 +41,12 @@ public class Enderchest implements CommandExecutor {
                     EnderChestOther = EnderChestOther.replace("%target%", target.getDisplayName());
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', EnderChestOther));
 
-                    LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has opened" + target.getDisplayName() + "'s enderchest");
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has opened" + target.getDisplayName() + "'s enderchest");
                     for (Player online : Bukkit.getOnlinePlayers()){
-                        if(online.hasPermission("easycommands.logs.admin")){
-                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has opened " + target.getDisplayName() + "'s enderchest]");
+                        if(settingsManager.isAdminLogsEnabled(online)) {
+                            if (online.hasPermission("easycommands.logs.admin")) {
+                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has opened " + target.getDisplayName() + "'s enderchest]");
+                            }
                         }
                    }
 

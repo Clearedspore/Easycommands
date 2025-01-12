@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Teleport;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Teleport implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public Teleport(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -27,10 +33,12 @@ public class Teleport implements CommandExecutor {
                 Teleport = Teleport.replace("%target%", target.getDisplayName());
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
-                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported to " + target.getDisplayName());
-                for (Player online : Bukkit.getOnlinePlayers()) {
-                    if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " teleported to " + target.getDisplayName() + "]");
+                LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported to " + target.getDisplayName());
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        if(settingsManager.isLogEnabled(online)) {
+                        if (online.hasPermission("easycommands.logs"))
+                            online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " teleported to " + target.getDisplayName() + "]");
+                    }
                 }
             } else if (args.length == 2) {
 
@@ -47,10 +55,12 @@ public class Teleport implements CommandExecutor {
                         Teleport = Teleport.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Teleport));
 
-                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName());
-                        for (Player online : Bukkit.getOnlinePlayers()) {
-                            if (online.hasPermission("easycommands.logs"))
-                                online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName() + "]");
+                        LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName());
+                            for (Player online : Bukkit.getOnlinePlayers()) {
+                                if(settingsManager.isLogEnabled(online)) {
+                                if (online.hasPermission("easycommands.logs"))
+                                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + playertosend.getDisplayName() + " to " + target.getDisplayName() + "]");
+                            }
                         }
                     }else{
                         p.sendMessage(ChatColor.RED + "You don't have permission to teleport other players to you!");

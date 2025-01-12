@@ -1,6 +1,7 @@
 package me.clearedspore.Features.MaintenanceSection;
 
 import me.clearedspore.ConfigFiles.Messages;
+import me.clearedspore.Features.Logs.LogManager;
 import me.clearedspore.easycommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -52,6 +53,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
             case "on" -> {
                 if (p.hasPermission("easycommands.maintenance.toggle") || p.hasPermission("easycommands.maintenance.*")) {
                     maintenanceManager.setMaintenanceEnabled(true);
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has enabled the maintenance");
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Mon));
                 } else {
                     p.sendMessage(ChatColor.RED + "You don't have permission to enable maintenance mode.");
@@ -60,6 +62,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
             case "off" -> {
                 if (p.hasPermission("easycommands.maintenance.toggle") || p.hasPermission("easycommands.maintenance.*")) {
                     maintenanceManager.setMaintenanceEnabled(false);
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has disabled the maintenance");
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Moff));
                 } else {
                     p.sendMessage(ChatColor.RED + "You don't have permission to disable maintenance mode.");
@@ -75,6 +78,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                     return true;
                 }
                 if (maintenanceManager.addToWhitelist(args[1])) {
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has added " + args[1] + " to the whitelist.");
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Madd.replace("%target%", args[1])));
                 } else {
                     sender.sendMessage(ChatColor.RED + args[1] + " is already on the whitelist.");
@@ -90,6 +94,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                     return true;
                 }
                 if (maintenanceManager.removeFromWhitelist(args[1])) {
+                    LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has removed " + args[1] + " from the whitelist.");
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Mremove.replace("%target%", args[1])));
                 } else {
                     sender.sendMessage(ChatColor.RED + args[1] + " is not on the whitelist.");
@@ -105,6 +110,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                         player.kickPlayer(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("kick-message", "&cMaintenance is enabled, you can't join!")));
                     }
                 }
+                LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has kicked all players from the server that are not whitelisted.");
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Mkickall));
             }
             default -> sender.sendMessage(ChatColor.RED + "Unknown command. Usage: /maintenance <on|off|add|remove|kickall>");

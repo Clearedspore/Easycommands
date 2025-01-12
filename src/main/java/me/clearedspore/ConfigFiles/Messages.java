@@ -14,15 +14,18 @@ public class Messages {
     private static File file;
     private static FileConfiguration MessagesFile;
 
-    public static void setup(){
+    public static void setup() {
         file = new File(Bukkit.getServer().getPluginManager().getPlugin("Easycommands").getDataFolder(), "messages.yml");
 
-        if(!file.exists()){
+        if (!file.exists()) {
             try {
                 file.createNewFile();
-            } catch (IOException e){
-                //done
+                Bukkit.getLogger().info("messages.yml file created successfully.");
+            } catch (IOException e) {
+                Bukkit.getLogger().severe("Could not create messages.yml file!");
             }
+        } else {
+            Bukkit.getLogger().info("messages.yml file found.");
         }
         MessagesFile = YamlConfiguration.loadConfiguration(file);
         List<String> HeaderText = new ArrayList<>();

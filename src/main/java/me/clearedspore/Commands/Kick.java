@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kick implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public Kick(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String playername = args[0];
@@ -32,7 +39,7 @@ public class Kick implements CommandExecutor {
                 sender.sendMessage("Please provide a reason!");
                 return true;
             }
-            if(args.length >= 2){
+            if(args.length >= 2) {
 
                 List<String> KickMessage = new ArrayList<>();
                 KickMessage.add(ChatColor.RED + "You have been Kicked!");
@@ -42,10 +49,12 @@ public class Kick implements CommandExecutor {
                 String kickMessage = String.join("\n", KickMessage);
                 target.kickPlayer(kickMessage);
                 sender.sendMessage("You have kicked " + target.getName());
-                for(Player online : Bukkit.getOnlinePlayers()){
-                    if(online.hasPermission("easycommands.logs")){
-                        online.sendMessage(ChatColor.RED + "[Console] " + ChatColor.WHITE + "Has kicked " + ChatColor.BLUE + target.getName());
-                        return true;
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    if (online.hasPermission("easycommands.logs")) {
+                        if (settingsManager.isLogEnabled(online)) {
+                            online.sendMessage(ChatColor.RED + "[Console] " + ChatColor.WHITE + "Has kicked " + ChatColor.BLUE + target.getName());
+                            return true;
+                        }
                     }
                 }
             }
@@ -68,17 +77,17 @@ public class Kick implements CommandExecutor {
                 KickMessage.add(ChatColor.WHITE + "");
                 String kickMessage = String.join("\n", KickMessage);
                 target.kickPlayer(kickMessage);
-                p.sendMessage(ChatColor.BLUE + "You have kicked " + ChatColor.WHITE + target.getName());
-
-                LogManager.log(p.getUniqueId(),  ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " Has kicked " + target.getName());
+                sender.sendMessage(ChatColor.BLUE + "You have kicked " + target.getName());
                 for(Player online : Bukkit.getOnlinePlayers()){
                     if(online.hasPermission("easycommands.logs")){
-                        online.sendMessage(ChatColor.RED + p.getName() + ChatColor.WHITE + "Has kicked " + ChatColor.BLUE + target.getName());
-                        return true;
+                        if(settingsManager.isLogEnabled(online)) {
+                            online.sendMessage(ChatColor.RED + p.getName() + ChatColor.WHITE + " Has kicked " + ChatColor.BLUE + target.getName());
+                            return true;
+                            }
+                        }
                     }
                 }
             }
-        }
         return true;
     }
 }

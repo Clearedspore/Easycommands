@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Spawn;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import me.clearedspore.easycommands;
@@ -12,10 +13,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SetSpawn implements CommandExecutor {
+    private final SettingsManager settingsManager;
 
     private final easycommands plugin;
 
-    public SetSpawn(easycommands plugin) {
+    public SetSpawn(SettingsManager settingsManager, easycommands plugin) {
+        this.settingsManager = settingsManager;
         this.plugin = plugin;
     }
 
@@ -42,11 +45,13 @@ public class SetSpawn implements CommandExecutor {
             setSpawnMessage = setSpawnMessage.replace("%prefix%", Prefix);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', setSpawnMessage));
 
-            LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has set a new spawn.");
+            LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has set a new spawn.");
             for (Player online : Bukkit.getOnlinePlayers()) {
+                if(settingsManager.isLogEnabled(online)) {
                 if (online.hasPermission("easycommands.logs")) {
-                    online.sendMessage(ChatColor.GRAY + "[ " + p.getDisplayName() + " has set a new spawn ]");
+                    online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has set a new spawn]");
                 }
+            }
             }
         } else {
             sender.sendMessage(ChatColor.RED + "Only players can use this command.");

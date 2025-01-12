@@ -1,5 +1,6 @@
 package me.clearedspore.Commands.Spawn;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import me.clearedspore.easycommands;
@@ -13,10 +14,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Spawn implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
 
     private final easycommands plugin;
 
-    public Spawn(easycommands plugin) {
+    public Spawn(SettingsManager settingsManager, easycommands plugin) {
+        this.settingsManager = settingsManager;
         this.plugin = plugin;
     }
 
@@ -25,10 +29,12 @@ public class Spawn implements CommandExecutor {
         if (sender instanceof Player p) {
 
             Location location = getSpawnLocation();
+            if(location == null){
+                p.sendMessage(ChatColor.RED + "Spawn location is not set!");
+            }
 
             if (location != null) {
                 if (args.length == 0) {
-                    // Teleport the sender to spawn
                     p.teleport(location);
 
                     String Spawn = Messages.get().getString("Spawn");
@@ -57,11 +63,13 @@ public class Spawn implements CommandExecutor {
                         SpawnT = SpawnT.replace("%target%", target.getDisplayName());
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', SpawnT));
 
-                        LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported " + target.getDisplayName() + " to spawn");
+                        LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has teleported " + target.getDisplayName() + " to spawn");
                         for (Player online : Bukkit.getOnlinePlayers()) {
+                            if(settingsManager.isLogEnabled(online)) {
                             if (online.hasPermission("easycommands.logs")) {
                                 online.sendMessage(ChatColor.GRAY + "[" + p.getDisplayName() + " has teleported " + target.getDisplayName() + " to spawn]");
                             }
+                        }
                         }
                     } else {
                         // Handle insufficient permissions for teleporting others

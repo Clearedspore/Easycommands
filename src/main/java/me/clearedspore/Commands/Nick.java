@@ -1,5 +1,6 @@
 package me.clearedspore.Commands;
 
+import me.clearedspore.Commands.settings.SettingsManager;
 import me.clearedspore.ConfigFiles.Messages;
 import me.clearedspore.Features.Logs.LogManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Nick implements CommandExecutor {
+    private final SettingsManager settingsManager;
+
+    public Nick(SettingsManager settingsManager) {
+        this.settingsManager = settingsManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player p){
@@ -25,10 +32,13 @@ public class Nick implements CommandExecutor {
                 Nick = Nick.replace("%nickname%", args[0]);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Nick));
 
-                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has nicked themself as " + args[0]);
+                LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has nicked themself as " + args[0]);
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + p.getName() + " has nicked themself as " + args[0] + "]");
+                    if (online.hasPermission("easycommands.logs")) {
+                        if (settingsManager.isLogEnabled(online)) {
+                            online.sendMessage(ChatColor.GRAY + "[Server: " + p.getName() + " has nicked themself as " + args[0] + "]");
+                        }
+                    }
                 }
 
                 return true;
@@ -44,10 +54,13 @@ public class Nick implements CommandExecutor {
                 Unnick = Unnick.replace("%prefix%", Prefix);
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Unnick));
 
-                LogManager.log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unnicked themself");
+                LogManager.getInstance().log(p.getUniqueId(), ChatColor.YELLOW + p.getName() + ChatColor.WHITE + " has unnicked themself");
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    if (online.hasPermission("easycommands.logs"))
-                        online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has unnicked themself]");
+                    if (online.hasPermission("easycommands.logs")){
+                        if (settingsManager.isLogEnabled(online)) {
+                            online.sendMessage(ChatColor.GRAY + "[Server: " + p.getDisplayName() + " has unnicked themself]");
+                        }
+                    }
                 }
             }
         }
