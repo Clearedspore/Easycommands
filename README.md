@@ -15,29 +15,6 @@ It is a free plugin that you can use for Your! server.
 
 I recommend using luckperms https://luckperms.net for your permission manager.
 
-Next update:
-messages for the warp function
-report function with gui!
-kit function with gui!
-config update!!
-
-Latest update:
-
-Bug fixes!
-
-- updatechecker was just totally not working I am sorry for that it is fixed now and I tested it really well this time!
-- invsee dind had the placeholder. that is fixed now you can use %target% in the message!
-
-
-WARP MESSAGES:
-Warp messages are not editable yet. I am working on that
-
-
-I got the idea for the /copyinv command from pog5 he is a dev on leoneMC thank you!
-You should join that btw
-discord: https://discord.gg/leonemc
-ip: play.leonemc.net
-
 Instructions:
 1. download the plugin by clicking download
 2. save it to your files
